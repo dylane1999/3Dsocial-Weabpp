@@ -14,10 +14,14 @@ import ParticlesBg from "particles-bg";
 import Box from "@material-ui/core/Box";
 
 import LandingVector from "../../img/LandingVector.svg";
+import LandingVector1 from "../../img/LandingVector1.svg";
+
 
 
 
 import ServiceSection from "../../components/ServiceSection/ServiceSection";
+import MoreInfoSection from "../../components/MoreInfoSection/MoreInfoSection";
+
 
 const Root = styled.div`
   width: 100%;
@@ -89,7 +93,7 @@ const Grid = styled.div`
   width: 100%;
   height: 100vh;
   background-color: #149bde;
-  background-image: url(${LandingVector});
+  background-image: url(${LandingVector1});
   background-position: bottom; 
   background-repeat: no-repeat;
   background-size: cover;
@@ -139,7 +143,8 @@ const AuthLayout = ({ refetch }) => {
         </Container>
       </Grid>
       <ServiceSection></ServiceSection>
-]    </Root>
+      <MoreInfoSection></MoreInfoSection>
+    </Root>
   );
 };
 

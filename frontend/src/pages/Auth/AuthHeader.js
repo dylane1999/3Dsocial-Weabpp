@@ -18,8 +18,8 @@ const Root = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 80px;
-  background-color: transparent;
+  height: 7d0px;
+  background-color: #373737;
   z-index: 5;
 `;
 
@@ -53,6 +53,8 @@ const Logo = styled(A)`
 
 const SignInContainer = styled.div`
   width: 500px;
+  padding-bottom: 10px;
+
 `;
 
 /**
