@@ -18,7 +18,7 @@ export const Container = styled.div`
   max-width: ${p => (p.maxWidth && p.theme.screen[p.maxWidth])};
   padding: ${p => p.padding ? `0 ${p.theme.spacing[p.padding]}` : `0 ${p.theme.spacing.sm}`};
   z-index: ${p => p.zIndex && p.theme.zIndex[p.zIndex]};
-  background-color: ${p => p.color && p.theme.colors[p.color]};
+  background-color: inherit;
   border-radius: ${p => p.radius && p.theme.radius[p.radius]};
 `;
 
@@ -73,10 +73,5 @@ export const Overlay = styled.div`
   bottom: 0;
   left: 0;
   z-index: ${p => p.theme.zIndex.md};
-  background-color: rgba(
-    0,
-    0,
-    0,
-    ${p => (p.transparency ? p.transparency : '0.8')}
   );
 `;

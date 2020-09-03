@@ -15,6 +15,8 @@ import Box from "@material-ui/core/Box";
 
 import LandingVector from "../../img/LandingVector.svg";
 import LandingVector1 from "../../img/LandingVector1.svg";
+import LandingVector2 from "../../img/LandingVector2.svg";
+
 
 
 
@@ -93,7 +95,7 @@ const Grid = styled.div`
   width: 100%;
   height: 100vh;
   background-color: #149bde;
-  background-image: url(${LandingVector1});
+  background-image: url(${LandingVector2});
   background-position: bottom; 
   background-repeat: no-repeat;
   background-size: cover;

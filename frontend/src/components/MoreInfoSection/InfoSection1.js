@@ -4,6 +4,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Box from "@material-ui/core/Box";
 import Printer1 from "../../img/Printer1.png";
 
+
+
 const Root = styled.div`
   display: flex;
   flex-direction: row;
@@ -46,16 +48,28 @@ const Paragraph = styled.p`
   }
 `;
 
+
 export const InfoSection1 = () => {
+
+const screenLarge = useMediaQuery("(min-width: 1100px)");
+const screenSmall = useMediaQuery("(max-width: 1100px)");
+
+
+const GetFlexDirection = () => {
+  if (screenLarge) {
+    return "row";
+  } else if (screenSmall) {
+    return "column";
+  }
+};
+
   return (
     <Root>
       <Box
         justifyContent="center"
         alignItems="center"
         display="flex"
-        flexDirection="row"
-        p={1}
-        m={1}
+        flexDirection= {GetFlexDirection()}
       >
         <Box>
           <img src={Printer1} />{" "}
@@ -65,9 +79,6 @@ export const InfoSection1 = () => {
           alignItems="center"
           display="flex"
           flexDirection="column"
-          p={1}
-          pl={5}
-          m={1}
         >
           <Heading>Check this Stuff Out.</Heading>
           <Paragraph>

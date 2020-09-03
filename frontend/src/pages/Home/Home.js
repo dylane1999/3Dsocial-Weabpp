@@ -63,7 +63,6 @@ const Home = () => {
       <Head />
 
       <Spacing top="lg" />
-      <h1>hello</h1>
 
       <CreatePost />
 

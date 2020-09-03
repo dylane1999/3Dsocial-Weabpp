@@ -22,7 +22,7 @@ import StyledCard from "components/StyledCard";
 import Rectangle from "../../img/Rectangle.png";
 import PrinterIcon from "../../img/PrinterIcon.svg";
 
-import MobileStyledCard from "components/MobileStyledCard";
+import MobileStyledCard from "components/MobileCard/MobileStyledCard";
 
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
@@ -67,12 +67,9 @@ const Welcome = styled.div`
   }
 `;
 
-const IntroCard = styled.div``;
+const IntroCard = styled.div`;
 
-const MobileIntroCard = styled.div`
-  @media (min-width: 1050px) {
-    display: none;
-  }
+
 `;
 
 const Heading = styled(H1)`
@@ -214,8 +211,8 @@ const SignUp = ({ history, refetch }) => {
       return (
         <MobileStyledCard
           image={Rectangle}
-          //title={"Lorem Ipsum"}
-          //subtitle={"lorem ipsum iore"}
+          title={"Lorem Ipsum"}
+          subtitle={"lorem ipsum iore"}
           mediaBg={"transparent"}
         ></MobileStyledCard>
       );
@@ -240,7 +237,7 @@ const SignUp = ({ history, refetch }) => {
               m={1}
             >
               <IntroCard>
-                <Box justifyItems="center">
+                <Box>
                   <Welcome>{GetCardType()}</Welcome>
                 </Box>
               </IntroCard>

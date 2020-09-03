@@ -28,21 +28,12 @@ import { useStore } from "store";
 import { SET_AUTH_USER } from "store/auth";
 
 import Box from "@material-ui/core/Box";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const Root = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   width: 100%;
-  position: relative;
-
-  @media (min-width: ${(p) => p.theme.screen.md}) {
-    width: ${(p) => p.theme.screen.md};
-  }
-
-  @media (min-width: ${(p) => parseInt(p.theme.screen.lg, 10) + 20 + "px"}) {
-    width: ${(p) => p.theme.screen.lg};
-  }
+  background-color: #313131;
+  color: white;
 `;
 
 const NavBar = styled.div`
@@ -51,6 +42,15 @@ const NavBar = styled.div`
   width: 100%;
   position: relative;
 `;
+
+const Hero = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  width: 100%;
+
+`;
+
 
 /**
  * Main layout of the app, when user is authenticated
@@ -63,6 +63,9 @@ const AppLayout = ({ location, authUser }) => {
   const [isSideBarOpen, setIsSidebarOpen] = useState(isDesktop);
 
   const sideBarRef = useRef("");
+
+  const screenLarge = useMediaQuery("(min-width: 971px)");
+  const screenSmall = useMediaQuery("(max-width: 971px)");
 
   useEffect(() => {
     dispatch({ type: SET_AUTH_USER, payload: authUser });
@@ -88,47 +91,70 @@ const AppLayout = ({ location, authUser }) => {
 
   if (!auth.user) return null;
 
+  const GetMarginSize = () => {
+    if (screenLarge) {
+      return 20;
+    } else if (screenSmall) {
+      return 0;
+    }
+  };
+
+  const GetJustifyContent = () => {
+    if (screenLarge) {
+      return "flex-start";
+    } else if (screenSmall) {
+      return "center";
+    }
+  };
+
   return (
     <>
       <Header toggleSideBar={() => setIsSidebarOpen(!isSideBarOpen)} />
-
-      <Box flexDirection="row" justifyContent="center" display="flex">
-        <Box>
-          <Box flexDirection="column" justifyContent="center" display="flex">
-            <Box pb={12}>
-              {" "}
-              <SideBar isOpen={isSideBarOpen} sideBarRef={sideBarRef} />
-            </Box>
-            <Box>
-              {" "}
-              <UserSuggestions pathname={location.pathname} />
+      <Hero> PIX</Hero>
+      <Root>
+        <Box
+          flexDirection="row"
+          justifyContent={GetJustifyContent()}
+          display="flex"
+          ml={GetMarginSize()}
+        >
+          <Box>
+            <Box flexDirection="column" justifyContent="center" display="flex">
+              <Box pb={12}>
+                {" "}
+                <SideBar isOpen={isSideBarOpen} sideBarRef={sideBarRef} />
+              </Box>
+              <Box>
+                {" "}
+                <UserSuggestions pathname={location.pathname} />
+              </Box>
             </Box>
           </Box>
+          <Box>
+            <Switch>
+              <Route exact path={Routes.HOME} component={Home} />
+
+              <Route exact path={Routes.EXPLORE} component={Explore} />
+
+              <Route exact path={Routes.PEOPLE} component={People} />
+
+              <Route
+                exact
+                path={Routes.NOTIFICATIONS}
+                component={Notifications}
+              />
+
+              <Route exact path={Routes.MESSAGES} component={Messages} />
+
+              <Route exact path={Routes.USER_PROFILE} component={Profile} />
+
+              <Route exact path={Routes.POST} component={Post} />
+
+              <Route component={NotFound} />
+            </Switch>
+          </Box>
         </Box>
-        <Box>
-          <Switch>
-            <Route exact path={Routes.HOME} component={Home} />
-
-            <Route exact path={Routes.EXPLORE} component={Explore} />
-
-            <Route exact path={Routes.PEOPLE} component={People} />
-
-            <Route
-              exact
-              path={Routes.NOTIFICATIONS}
-              component={Notifications}
-            />
-
-            <Route exact path={Routes.MESSAGES} component={Messages} />
-
-            <Route exact path={Routes.USER_PROFILE} component={Profile} />
-
-            <Route exact path={Routes.POST} component={Post} />
-
-            <Route component={NotFound} />
-          </Switch>
-        </Box>
-      </Box>
+      </Root>
     </>
   );
 };
