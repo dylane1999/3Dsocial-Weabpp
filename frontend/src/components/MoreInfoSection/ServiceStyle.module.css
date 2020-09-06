@@ -26,39 +26,21 @@
 }
 */
 
+
 .container {
-  position: relative;
   background: inherit;
   overflow: hidden;
-  height: 100%;
   width: 100%;
-  background: #149BDE;
-  border-radius: 14.6296px;
-  filter: drop-shadow(-19px 8px 40px #198FD2);
-}
+  height: auto;
 
-.Slide-title-25 {
-  color: #fff;
-  overflow: hidden;
-  font-size: 2px;
-
-}
-
-
-
-.CardWrapper {
-  padding: 10px;
-  background: inherit;
-  overflow: hidden;
-  width: 90%;
 
 
 }
 
 @media (max-width: 1315px) {
-  .CardWrapper {
+  .container {
     background: inherit;
-    width: 90%;
+    width: 100%;
     height: auto;
 
   

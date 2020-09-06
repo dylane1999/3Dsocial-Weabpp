@@ -1,7 +1,11 @@
 import React from "react";
 import ServiceCard from "./ServiceCard";
 import ServiceCardMobile from "./ServiceCardMobile";
-import Rectangle from "../../img/Rectangle.png";
+import LandingPage2 from "../../img/LandingPage2.svg";
+import Service1 from "../../img/Service1.svg";
+import Service2 from "../../img/Service2.svg";
+import Service3 from "../../img/Service3.svg";
+
 import styled from "styled-components";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Box from "@material-ui/core/Box";
@@ -11,6 +15,10 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-image: url(${LandingPage2});
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-size: cover;
   align-items: center;
   height: 60rem;
   width: 100%;
@@ -19,10 +27,14 @@ const Root = styled.div`
   @media (max-width: 1315px) {
     display: flex;
     flex-direction: column;
+    background-image: url(${LandingPage2});
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-size: cover;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 125rem;
+    height: 110rem;
     padding-bottom: 2rem;
 
 
@@ -87,7 +99,7 @@ export const ServiceSection = () => {
             <div className={styles.container}>
               <ServiceCardMobile
                 className={styles.card}
-                image={Rectangle}
+                image={Service1}
                 title={"Lorem Ipsum"}
                 subtitle={"lorem ipsum iore"}
                 mediaBg={"transparent"}
@@ -97,7 +109,7 @@ export const ServiceSection = () => {
           <Box p={4}>
             <div className={styles.container}>
               <ServiceCardMobile
-                image={Rectangle}
+                image={Service2}
                 title={"Lorem Ipsum"}
                 subtitle={"lorem ipsum iore"}
                 mediaBg={"transparent"}
@@ -107,7 +119,7 @@ export const ServiceSection = () => {
           <Box p={4}>
             <div className={styles.container}>
               <ServiceCardMobile
-                image={Rectangle}
+                image={Service3}
                 title={"Lorem Ipsum"}
                 subtitle={"lorem ipsum iore"}
                 mediaBg={"transparent"}
@@ -123,7 +135,7 @@ export const ServiceSection = () => {
             <div className={styles.container}>
               <ServiceCard
                 className={styles.card}
-                image={Rectangle}
+                image={Service1}
                 title={"Lorem Ipsum"}
                 subtitle={"lorem ipsum iore"}
                 mediaBg={"transparent"}
@@ -133,7 +145,7 @@ export const ServiceSection = () => {
           <Box p={4}>
             <div className={styles.container}>
               <ServiceCard
-                image={Rectangle}
+                image={Service2}
                 title={"Lorem Ipsum"}
                 subtitle={"lorem ipsum iore"}
                 mediaBg={"transparent"}
@@ -143,7 +155,7 @@ export const ServiceSection = () => {
           <Box p={4}>
             <div className={styles.container}>
               <ServiceCard
-                image={Rectangle}
+                image={Service3}
                 title={"Lorem Ipsum"}
                 subtitle={"lorem ipsum iore"}
                 mediaBg={"transparent"}
@@ -166,7 +178,6 @@ export const ServiceSection = () => {
       </Paragraph>
 
       <Box
-        className={styles.CardWrapper}
         flexDirection={GetFlexDirection()}
         justifyContent="center"
         alignContent="center"

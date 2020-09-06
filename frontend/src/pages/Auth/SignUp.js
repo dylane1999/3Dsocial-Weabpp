@@ -19,7 +19,6 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 
 import StyledCard from "components/StyledCard";
-import Rectangle from "../../img/Rectangle.png";
 import PrinterIcon from "../../img/PrinterIcon.svg";
 
 import MobileStyledCard from "components/MobileCard/MobileStyledCard";
@@ -210,7 +209,7 @@ const SignUp = ({ history, refetch }) => {
     } else if (screenSmall) {
       return (
         <MobileStyledCard
-          image={Rectangle}
+          image={PrinterIcon}
           title={"Lorem Ipsum"}
           subtitle={"lorem ipsum iore"}
           mediaBg={"transparent"}

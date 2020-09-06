@@ -2,18 +2,24 @@ import React from "react";
 import styled from "styled-components";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Box from "@material-ui/core/Box";
-import Printer1 from "../../img/Printer1.png";
+import MoreInfo1 from "../../img/MoreInfo1.png";
+import LandingPage4 from "../../img/LandingPage4.svg";
+import styles from "./ServiceStyle.module.css";
 
 
 const Root = styled.div`
   display: flex;
   flex-direction: row;
+  overflow-x:hidden;
   justify-content: center;
   align-items: center;
-  height: 50rem;
+  background-image: url(${LandingPage4});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 60rem;
   width: 100%;
   background-color: #149bde;
-
 `;
 
 const Heading = styled.p`
@@ -47,28 +53,29 @@ const Paragraph = styled.p`
   }
 `;
 
-
+const imageContainer = styled.div`
+  width: 100%;
+  height: auto;
+`;
 
 export const InfoSection1 = () => {
-
   const screenLarge = useMediaQuery("(min-width: 1100px)");
   const screenSmall = useMediaQuery("(max-width: 1100px)");
-  
-const GetFlexDirection = () => {
-  if (screenLarge) {
-    return "row";
-  } else if (screenSmall) {
-    return "column";
-  }
-};
+
+  const GetFlexDirection = () => {
+    if (screenLarge) {
+      return "row";
+    } else if (screenSmall) {
+      return "column";
+    }
+  };
   return (
     <Root>
       <Box
         justifyContent="center"
         alignItems="center"
         display="flex"
-        flexDirection= {GetFlexDirection()}
-
+        flexDirection={GetFlexDirection()}
       >
         <Box
           justifyContent="center"
@@ -85,7 +92,10 @@ const GetFlexDirection = () => {
           </Paragraph>
         </Box>
         <Box>
-          <img src={Printer1} />{" "}
+          <imageContainer>
+            {" "}
+            <img className={styles.container} src={MoreInfo1} alt="more info" />{" "}
+          </imageContainer>
         </Box>
       </Box>
     </Root>

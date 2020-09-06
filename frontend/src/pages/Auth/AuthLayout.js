@@ -3,18 +3,11 @@ import PropTypes from "prop-types";
 import { Switch, Route, Redirect } from "react-router-dom";
 import styled from "styled-components";
 
-import { Overlay } from "components/Layout";
 
 import { AuthHeader, SignUp, ForgotPassword, ResetPassword } from "pages/Auth";
 
 import * as Routes from "routes";
 
-import ParticlesBg from "particles-bg";
-
-import Box from "@material-ui/core/Box";
-
-import LandingVector from "../../img/LandingVector.svg";
-import LandingVector1 from "../../img/LandingVector1.svg";
 import LandingVector2 from "../../img/LandingVector2.svg";
 
 
@@ -42,6 +35,11 @@ const Container = styled.div`
 
   @media (min-width: ${(p) => p.theme.screen.md}) {
     justify-content: center;
+  }
+
+
+  @media (max-width: 400px) {
+    padding-bottom: 35px;
   }
 `;
 
@@ -96,7 +94,7 @@ const Grid = styled.div`
   height: 100vh;
   background-color: #149bde;
   background-image: url(${LandingVector2});
-  background-position: bottom; 
+  background-position: center; 
   background-repeat: no-repeat;
   background-size: cover;
   grid-template-columns: auto;
