@@ -6,8 +6,8 @@ import styled from "styled-components";
 
 import Header from "components/App/Header";
 import NotFound from "components/NotFound";
-import SideBar from "./SideBar";
-import UserSuggestions from "./UserSuggestions";
+import SideBar from "../App/SideBar";
+import UserSuggestions from "../App/UserSuggestions";
 
 import Home from "pages/Home";
 import Profile from "pages/Profile";
@@ -29,11 +29,22 @@ import { SET_AUTH_USER } from "store/auth";
 
 import Box from "@material-ui/core/Box";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import DesignOfWeek from "../../img/DesignOfWeek.png";
+import HeroModelCreator from "./HeroModelCreator";
+import HomeBackground from "../../img/HomeBackground.svg"
+
+import styles from "./ServiceStyle.module.css";
+//className={styles.container}>
 
 const Root = styled.div`
   width: 100%;
-  background-color: #313131;
+  background-color: #1ca7ec;
+  /* background-image: url(${HomeBackground});*/
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: white;
+  padding-bottom: 100px;
 `;
 
 const NavBar = styled.div`
@@ -46,9 +57,39 @@ const NavBar = styled.div`
 const Hero = styled.div`
   display: flex;
   flex-direction: column;
-  align-items:center;
+  align-items: center;
   width: 100%;
+  height: 200px;
+  background-color: #1ca7ec;
+`;
 
+const HeroImage = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(30.67deg, #003959 4.59%, rgba(255, 255, 255, 0) 103.19%), url(${DesignOfWeek});
+  border-radius: 0px 0px 18px 0px;
+  border-bottom: none;
+`;
+
+const HeroContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 75%;
+  height: 200px;
+`;
+
+const HeroModelName = styled.p`
+  font-family: aktiv-grotesk;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 30.888px;
+  line-height: 33px;
+  color: #ffffff;
 `;
 
 
@@ -91,7 +132,7 @@ const AppLayout = ({ location, authUser }) => {
 
   if (!auth.user) return null;
 
-  const GetMarginSize = () => {
+  const GetSidebarMarginSize = () => {
     if (screenLarge) {
       return 20;
     } else if (screenSmall) {
@@ -99,6 +140,13 @@ const AppLayout = ({ location, authUser }) => {
     }
   };
 
+  const GetHomeMarginSize = () => {
+    if (screenLarge) {
+      return 15;
+    } else if (screenSmall) {
+      return 0;
+    }
+  };
   const GetJustifyContent = () => {
     if (screenLarge) {
       return "flex-start";
@@ -110,13 +158,20 @@ const AppLayout = ({ location, authUser }) => {
   return (
     <>
       <Header toggleSideBar={() => setIsSidebarOpen(!isSideBarOpen)} />
-      <Hero> PIX</Hero>
+      <Hero>
+        <HeroImage>
+          <HeroContent>
+            <HeroModelName>Model of the week</HeroModelName>
+            <HeroModelCreator imageInfo={auth.user.image} AuthorName={"John Smith"} PostType={"Product Packaging"}></HeroModelCreator>
+          </HeroContent>
+        </HeroImage>{" "}
+      </Hero>
       <Root>
         <Box
           flexDirection="row"
           justifyContent={GetJustifyContent()}
           display="flex"
-          ml={GetMarginSize()}
+          ml={GetSidebarMarginSize()}
         >
           <Box>
             <Box flexDirection="column" justifyContent="center" display="flex">
@@ -130,7 +185,7 @@ const AppLayout = ({ location, authUser }) => {
               </Box>
             </Box>
           </Box>
-          <Box>
+          <Box pl={GetHomeMarginSize()}>
             <Switch>
               <Route exact path={Routes.HOME} component={Home} />
 

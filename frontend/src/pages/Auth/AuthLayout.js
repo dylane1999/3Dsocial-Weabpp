@@ -50,24 +50,6 @@ const Pages = styled.div`
   }
 `;
 
-const Flex = styled.div`
-  grid-area:l
-  margin-right: 100px;
-
-
-  @media (max-width: 1250px) {
-    display: none;
-  }
-`;
-
-const Line = styled.div`
-  position: absolute;
-  width: 1440px;
-  height: 535px;
-  left: 0px;
-  top: 268px;
-  background: #1ca7ec;
-`;
 
 const Grid = styled.div`
   @media (max-width: 1250px) {
@@ -80,9 +62,9 @@ const Grid = styled.div`
     justify-content: center;
     grid-template-areas:
       ".   c   c   c   c   c"
-      "l   c   c   c   c   c"
-      "l   c   c   c   c   c"
-      "l   c   c   c   c   c"
+      ".   c   c   c   c   c"
+      ".   c   c   c   c   c"
+      ".   c   c   c   c   c"
       ".   c   c   c   c   c"
       ".   c   c   c   c   c"
       ".   .   .   .   .   ."

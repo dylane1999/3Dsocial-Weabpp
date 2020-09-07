@@ -23,8 +23,7 @@ import { useGlobalMessage } from "hooks/useGlobalMessage";
 const Root = styled(Container)`
   width: 40vw;
   height: 100%;
-  background: #818181;
-  border: 1.5px solid #a0a0a0;
+  background: #3E3E3E;
   border-radius: 54px;
 `;
 
