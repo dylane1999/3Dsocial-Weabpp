@@ -5,7 +5,7 @@ import React, { useState,setState, state } from "react";
 class ChangingSubtitle extends React.Component {
   constructor(props) {
     super(props);
-    this.greetings = ["this", "is", "a"]
+    this.greetings = ["free downloads", "follow popular designers", "print anything"]
     this.state = {
       greetingIndex: 0
     };

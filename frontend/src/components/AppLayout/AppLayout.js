@@ -39,12 +39,13 @@ import styles from "./ServiceStyle.module.css";
 const Root = styled.div`
   width: 100%;
   background-color: #1ca7ec;
-  /* background-image: url(${HomeBackground});*/
+  /*background-image: url(${HomeBackground});*/
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
   color: white;
   padding-bottom: 100px;
+  background-position: top;
+  background-size: 100%;
 `;
 
 const NavBar = styled.div`
@@ -72,6 +73,9 @@ const HeroImage = styled.div`
   background: linear-gradient(30.67deg, #003959 4.59%, rgba(255, 255, 255, 0) 103.19%), url(${DesignOfWeek});
   border-radius: 0px 0px 18px 0px;
   border-bottom: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 `;
 
 const HeroContent = styled.div`
@@ -134,7 +138,7 @@ const AppLayout = ({ location, authUser }) => {
 
   const GetSidebarMarginSize = () => {
     if (screenLarge) {
-      return 20;
+      return 10;
     } else if (screenSmall) {
       return 0;
     }

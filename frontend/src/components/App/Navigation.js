@@ -30,6 +30,7 @@ const Link = styled(NavLink)`
 
     @media (min-width: ${p => p.theme.screen.md}) {
       background-color: ${p => p.theme.colors.white};
+      
     }
   }
 `;
@@ -55,6 +56,7 @@ const Root = styled.div`
 
 const Name = styled.div`
   margin-left: ${p => p.theme.spacing.sm};
+  color: white; 
 `;
 
 /**
@@ -73,7 +75,7 @@ const Navigation = () => {
 
       <Link exact activeClassName="selected" to={Routes.EXPLORE}>
         <ListItem>
-          <ExploreIcon width={20} />
+          <ExploreIcon />
           <Name>Explore</Name>
         </ListItem>
       </Link>
@@ -98,7 +100,7 @@ const Navigation = () => {
         to={generatePath(Routes.MESSAGES, { userId: Routes.NEW_ID_VALUE })}
       >
         <ListItem>
-          <EnvelopeIcon width={18} />
+          <EnvelopeIcon />
           <Name>Messages</Name>
         </ListItem>
       </Link>

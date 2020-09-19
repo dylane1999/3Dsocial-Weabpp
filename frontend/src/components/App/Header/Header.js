@@ -19,34 +19,6 @@ import SiteInfo from "constants/SiteInfo.json";
 
 import * as Routes from "routes";
 
-const Root = styled(Container)`
-  position: sticky;
-  height: 100%;
-  top: 0;
-  z-index: ${(p) => p.theme.zIndex.md};
-  height: ${HEADER_HEIGHT}px;
-
-  @media (min-width: ${(p) => p.theme.screen.md}) {
-    z-index: ${(p) => p.theme.zIndex.md};
-  }
-`;
-
-const Wrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: row no-wrap;
-  height: 100%;
-  align-items: center;
-  justify-content: flex-end;
-  height: ${HEADER_HEIGHT}px;
-  margin: 0 auto;
-  width: 100%;
-  background-color: inherit;
-
-  @media (max-width: 500px;) {
-    z-index: ${(p) => p.theme.zIndex.md};
-  }
-`;
 
 const NavWrapper = styled.div`
   position: sticky;

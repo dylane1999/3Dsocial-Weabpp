@@ -5,7 +5,7 @@ import React, { useState,setState, state } from "react";
 class ChangingTitle extends React.Component {
   constructor(props) {
     super(props);
-    this.greetings = ["Hi", "Hello", "Heyo"]
+    this.greetings = ["100+ unique designs", "3D print designs", "connect to other designers"]
     this.state = {
       greetingIndex: 0
     };
@@ -25,7 +25,7 @@ class ChangingTitle extends React.Component {
   render() {
     return (
       <div>
-        <h1>{this.greetings[this.state.greetingIndex] }</h1>
+        <p>{this.greetings[this.state.greetingIndex] }</p>
       </div>
     );
   }

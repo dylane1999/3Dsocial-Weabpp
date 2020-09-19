@@ -193,7 +193,7 @@ const CreatePost = () => {
                 {isFocused && (
                   <Options>
                     <PostImageUpload
-                      label="Photo"
+                      label="Create "
                       handleChange={handlePostImageUpload}
                     />
 

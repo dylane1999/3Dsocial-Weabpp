@@ -9,7 +9,7 @@ import theme from 'theme';
  */
 export const SearchIcon = ({ width, color }) => {
   const DEFAULT_WIDTH = '16';
-  const DEFAULT_COLOR = theme.colors.text.secondary;
+  const DEFAULT_COLOR = "white";
 
   return (
     <svg
