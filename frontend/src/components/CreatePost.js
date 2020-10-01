@@ -171,7 +171,7 @@ const CreatePost = () => {
 
                   <Textarea
                     type="textarea"
-                    name="title"
+                    name="titddle"
                     focus={isFocused}
                     value={title}
                     onFocus={handleOnFocus}
