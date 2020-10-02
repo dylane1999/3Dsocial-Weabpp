@@ -24,7 +24,6 @@ const Button = styled.button`
 
 
 
-
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -32,9 +31,9 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-const CreateUnfocused = () => {
+const CreateUnfocused = (props) => {
   return (
-    <Root>
+    <Root onClick={props.buttonClick}>
       <Wrapper>
         <img alt="x" src={PostIcon}/>
         <Button>create a post</Button>

@@ -1,26 +1,11 @@
 import React, { useState } from "react";
 import { Mutation } from "react-apollo";
 import styled from "styled-components";
-
-import { Spacing, Overlay, Container } from "components/Layout";
-import { Error } from "components/Text";
-import { Button } from "components/Form";
-import Avatar from "components/Avatar";
-
-import PostImageUpload from "pages/Home/PostImageUpload";
-
-import { GET_FOLLOWED_POSTS, CREATE_POST } from "graphql/post";
-import { GET_AUTH_USER, GET_USER_POSTS } from "graphql/user";
-
-import { useStore } from "store";
-
-import { PROFILE_PAGE_POSTS_LIMIT } from "constants/DataLimit";
-import { HOME_PAGE_POSTS_LIMIT } from "constants/DataLimit";
-import { MAX_POST_IMAGE_SIZE } from "constants/ImageSize";
+import Box from "@material-ui/core/Box";
 
 
 
-import { useGlobalMessage } from "hooks/useGlobalMessage";
+import PostPopup from "./PostPopup";
 
 const Root = styled.div`
   position: fixed; /* Stay in place */
@@ -34,22 +19,12 @@ const Root = styled.div`
   backdrop-filter: blur(20px);
 `;
 
-const Popup = styled.div`
-  display: flex;
 
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  background: #FFFAFA;
-  border: none;
-  width: 50vw;
-  height: 25vw;
-  border-radius: 12px;
-`;
 
-const CreateFocused = () => {
+const CreateFocused = (props) => {
   return (
-    <Root>
-      <Popup></Popup>
+    <Root >
+      <PostPopup buttonClick={props.buttonClick}/>
     </Root>
   );
 };
