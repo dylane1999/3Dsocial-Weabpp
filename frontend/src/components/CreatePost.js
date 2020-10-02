@@ -1,50 +1,52 @@
-import React, { useState } from 'react';
-import { Mutation } from 'react-apollo';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import { Mutation } from "react-apollo";
+import styled from "styled-components";
 
-import { Spacing, Overlay, Container } from 'components/Layout';
-import { Error } from 'components/Text';
-import { Button } from 'components/Form';
-import Avatar from 'components/Avatar';
+import { Spacing, Overlay, Container } from "components/Layout";
+import { Error } from "components/Text";
+import { Button } from "components/Form";
+import Avatar from "components/Avatar";
 
-import PostImageUpload from 'pages/Home/PostImageUpload';
+import PostImageUpload from "pages/Home/PostImageUpload";
 
-import { GET_FOLLOWED_POSTS, CREATE_POST } from 'graphql/post';
-import { GET_AUTH_USER, GET_USER_POSTS } from 'graphql/user';
+import { GET_FOLLOWED_POSTS, CREATE_POST } from "graphql/post";
+import { GET_AUTH_USER, GET_USER_POSTS } from "graphql/user";
 
-import { useStore } from 'store';
+import { useStore } from "store";
 
-import { PROFILE_PAGE_POSTS_LIMIT } from 'constants/DataLimit';
-import { HOME_PAGE_POSTS_LIMIT } from 'constants/DataLimit';
-import { MAX_POST_IMAGE_SIZE } from 'constants/ImageSize';
+import { PROFILE_PAGE_POSTS_LIMIT } from "constants/DataLimit";
+import { HOME_PAGE_POSTS_LIMIT } from "constants/DataLimit";
+import { MAX_POST_IMAGE_SIZE } from "constants/ImageSize";
 
-import { useGlobalMessage } from 'hooks/useGlobalMessage';
+import { useGlobalMessage } from "hooks/useGlobalMessage";
 
 const Root = styled(Container)`
-  border: 0;
-  border: 1px solid ${p => p.theme.colors.border.main};
+  width: 40vw;
+  height: 100%;
+  background: #3E3E3E;
+  border-radius: 54px;
 `;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: ${p => p.theme.spacing.sm} 0;
+  padding: 10px 0px;
 `;
 
 const Textarea = styled.textarea`
   width: 100%;
-  margin: 0 ${p => p.theme.spacing.xs};
-  padding-left: ${p => p.theme.spacing.sm};
-  padding-top: ${p => p.theme.spacing.xs};
+  margin: 0 ${(p) => p.theme.spacing.xs};
+  padding-left: ${(p) => p.theme.spacing.sm};
+  padding-top: ${(p) => p.theme.spacing.xs};
   border: 0;
   outline: none;
   resize: none;
   transition: 0.1s ease-out;
-  height: ${p => (p.focus ? '80px' : '40px')};
-  font-size: ${p => p.theme.font.size.xs};
-  background-color: ${p => p.theme.colors.grey[100]};
-  border-radius: ${p => p.theme.radius.md};
+  height: ${(p) => (p.focus ? "80px" : "40px")};
+  font-size: ${(p) => p.theme.font.size.xs};
+  background-color: ${(p) => p.theme.colors.grey[100]};
+  border-radius: ${(p) => p.theme.radius.md};
 `;
 
 const ImagePreviewContainer = styled.div`
@@ -52,7 +54,7 @@ const ImagePreviewContainer = styled.div`
   height: 150px;
   overflow: hidden;
   flex-shrink: 0;
-  box-shadow: ${p => p.theme.shadows.sm};
+  box-shadow: ${(p) => p.theme.shadows.sm};
 `;
 
 const ImagePreview = styled.img`
@@ -65,8 +67,8 @@ const Options = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-top: 1px solid ${p => p.theme.colors.border.main};
-  padding: ${p => p.theme.spacing.sm} 0;
+  border-top: 1px solid ${(p) => p.theme.colors.border.main};
+  padding: ${(p) => p.theme.spacing.sm} 0;
 `;
 
 const Buttons = styled.div`
@@ -74,28 +76,31 @@ const Buttons = styled.div`
   flex-direction: row;
 `;
 
+
+
+
 /**
  * Component for creating a post
  */
 const CreatePost = () => {
   const [{ auth }] = useStore();
-  const [title, setTitle] = useState('');
-  const [image, setImage] = useState('');
+  const [title, setTitle] = useState("");
+  const [image, setImage] = useState("");
   const [isFocused, setIsFocused] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const message = useGlobalMessage();
 
   const handleReset = () => {
-    setTitle('');
-    setImage('');
+    setTitle("");
+    setImage("");
     setIsFocused(false);
-    setError('');
+    setError("");
   };
 
   const handleOnFocus = () => setIsFocused(true);
 
-  const handlePostImageUpload = e => {
+  const handlePostImageUpload = (e) => {
     const file = e.target.files[0];
 
     if (!file) return;
@@ -113,7 +118,7 @@ const CreatePost = () => {
     e.target.value = null;
   };
 
-  const handleTitleChange = e => setTitle(e.target.value);
+  const handleTitleChange = (e) => setTitle(e.target.value);
 
   const handleSubmit = async (e, createPost) => {
     e.preventDefault();
@@ -153,18 +158,20 @@ const CreatePost = () => {
             {isFocused && <Overlay onClick={handleReset} />}
 
             <Root
-              zIndex={isFocused ? 'md' : 'xs'}
+              zIndex={isFocused ? "md" : "xs"}
               color="white"
               radius="sm"
               padding="sm"
             >
-              <form onSubmit={e => handleSubmit(e, createPost)}>
+              <form onSubmit={(e) => handleSubmit(e, createPost)}>
                 <Wrapper>
-                  <Avatar image={auth.user.image} size={40} />
+                  {!isFocused && (
+                    <PostImageUpload handleChange={handlePostImageUpload} />
+                  )}
 
                   <Textarea
                     type="textarea"
-                    name="title"
+                    name="titddle"
                     focus={isFocused}
                     value={title}
                     onFocus={handleOnFocus}
@@ -172,9 +179,7 @@ const CreatePost = () => {
                     placeholder="Add a post"
                   />
 
-                  {!isFocused && (
-                    <PostImageUpload handleChange={handlePostImageUpload} />
-                  )}
+                  <Avatar image={auth.user.image} size={40} />
                 </Wrapper>
 
                 {image && (
@@ -188,7 +193,7 @@ const CreatePost = () => {
                 {isFocused && (
                   <Options>
                     <PostImageUpload
-                      label="Photo"
+                      label="Create "
                       handleChange={handlePostImageUpload}
                     />
 
@@ -208,7 +213,7 @@ const CreatePost = () => {
                     <Spacing top="xs" bottom="sm">
                       <Error size="xs">
                         {apiError
-                          ? 'Something went wrong, please try again.'
+                          ? "Something went wrong, please try again."
                           : error}
                       </Error>
                     </Spacing>

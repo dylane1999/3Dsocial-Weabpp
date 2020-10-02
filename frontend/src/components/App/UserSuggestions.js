@@ -1,50 +1,49 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { matchPath } from 'react-router';
-import { generatePath } from 'react-router-dom';
-import { Query } from 'react-apollo';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { matchPath } from "react-router";
+import { generatePath } from "react-router-dom";
+import { Query } from "react-apollo";
 
-import { Loading } from 'components/Loading';
-import { H3, A } from 'components/Text';
-import { Spacing } from 'components/Layout';
-import Avatar from 'components/Avatar';
+import { Loading } from "components/Loading";
+import { A } from "components/Text";
+import { Spacing } from "components/Layout";
+import Avatar from "components/Avatar";
 
-import { useStore } from 'store';
+import { useStore } from "store";
 
-import { USER_SUGGESTIONS } from 'graphql/user';
+import { USER_SUGGESTIONS } from "graphql/user";
 
-import { USER_SUGGESTIONS_WIDTH, HEADER_HEIGHT } from 'constants/Layout';
+import { USER_SUGGESTIONS_WIDTH, HEADER_HEIGHT } from "constants/Layout";
 
-import * as Routes from 'routes';
+import * as Routes from "routes";
 
 const Root = styled.div`
   display: none;
-  background-color: ${p => p.theme.colors.white};
-  border: 1px solid ${p => p.theme.colors.border.main};
+  background-color: inherit;
   position: sticky;
   top: ${HEADER_HEIGHT + 40}px;
   right: 0;
   height: 100%;
   width: ${USER_SUGGESTIONS_WIDTH}px;
-  padding: ${p => p.theme.spacing.sm};
-  border-radius: ${p => p.theme.radius.sm};
+  padding: ${(p) => p.theme.spacing.sm};
+  border-radius: ${(p) => p.theme.radius.sm};
 
-  @media (min-width: ${p => p.theme.screen.md}) {
+  @media (min-width: ${(p) => p.theme.screen.md}) {
     display: block;
   }
 `;
 
 const List = styled.ul`
   padding: 0;
-  padding-top: ${p => p.theme.spacing.xs};
+  padding-top: ${(p) => p.theme.spacing.xs};
 `;
 
 const ListItem = styled.li`
   list-style-type: none;
   display: flex;
   flex-direction: row;
-  margin-bottom: ${p => p.theme.spacing.sm};
+  margin-bottom: ${(p) => p.theme.spacing.sm};
 
   &:last-child {
     margin-bottom: 0;
@@ -52,13 +51,20 @@ const ListItem = styled.li`
 `;
 
 const FullName = styled.div`
-  font-weight: ${p => p.theme.font.weight.bold};
-  color: ${p =>
-    p.active ? p.theme.colors.primary.main : p.theme.colors.text.primary};
+  color: white;
+  font-family: proxima-nova;
+  font-size: 17px;
 `;
 
 const UserName = styled.div`
-  color: ${p => p.theme.colors.text.hint};
+  color: #DCDCDC;
+  font-family: proxima-nova;
+`;
+
+const Heading = styled.div`
+  color: white;
+  font-size: 25.888px;
+  font-family: aktiv-grotesk;
 `;
 
 /**
@@ -67,11 +73,13 @@ const UserName = styled.div`
 const UserSuggestions = ({ pathname }) => {
   const [{ auth }] = useStore();
 
-  const hideUserSuggestions = matchPath(pathname, {
-    path: [Routes.MESSAGES, Routes.PEOPLE, Routes.EXPLORE, Routes.USER_PROFILE],
-  });
+  // Code that hides user suggestionbox based upon current path
+  //
+  //const hideUserSuggestions = matchPath(pathname, {
+  //    path: [Routes.MESSAGES, Routes.PEOPLE, Routes.EXPLORE, Routes.USER_PROFILE],
+  //  });
 
-  if (hideUserSuggestions) return null;
+  //  if (hideUserSuggestions) return null;
 
   return (
     <Query query={USER_SUGGESTIONS} variables={{ userId: auth.user.id }}>
@@ -89,17 +97,17 @@ const UserSuggestions = ({ pathname }) => {
 
         return (
           <Root>
-            <H3>Suggestions For You</H3>
+            <Heading>Suggestions</Heading>
 
             <List>
-              {data.suggestPeople.map(user => (
+              {data.suggestPeople.map((user) => (
                 <ListItem key={user.id}>
                   <A
                     to={generatePath(Routes.USER_PROFILE, {
                       username: user.username,
                     })}
                   >
-                    <Avatar image={user.image} />
+                    <Avatar image={user.image} size={50} />
                   </A>
 
                   <Spacing left="xs">

@@ -32,8 +32,8 @@ const Root = styled.div`
 
   @media (min-width: ${p => p.theme.screen.md}) {
     padding-top: 0;
-    position: sticky;
-    top: 100px;
+    position: relative;
+    top: 40px;
     margin-left: ${p => (p.isOpen ? 0 : `-${SIDEBAR_DESKTOP_WIDTH}px`)};
     flex-basis: ${SIDEBAR_DESKTOP_WIDTH}px;
     flex-grow: 0;

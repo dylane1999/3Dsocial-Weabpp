@@ -24,13 +24,14 @@ const Input = styled.input`
   border-radius: ${p => p.theme.radius.md};
   padding-left: ${p => (p.hideIcon ? p.theme.spacing.xs : p.theme.spacing.lg)};
   padding-right: ${p => p.theme.spacing.lg};
-  color: ${p => p.theme.colors.text.main};
+  color: white;
   font-size: ${p => p.theme.font.size.xs};
-  background-color: ${p =>
-    p.backgroundColor
-      ? p.theme.colors[p.backgroundColor]
-      : p.theme.colors.grey[200]};
+  background-color: inherit;
   transition: border-color 0.1s;
+
+  &::placeholder {
+    color: white;
+  }
 
   &:focus {
     &::placeholder {

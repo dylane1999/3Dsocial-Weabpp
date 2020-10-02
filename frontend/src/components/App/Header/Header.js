@@ -1,114 +1,111 @@
-import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
+import styled, { css } from "styled-components";
+import { withRouter } from "react-router-dom";
 
-import { NotificationIcon, MenuIcon, EnvelopeOpenIcon } from 'components/icons';
-import { Container, Spacing } from 'components/Layout';
-import { A } from 'components/Text';
-import { Button } from 'components/Form';
-import Avatar from 'components/Avatar';
-import Search from 'components/Search';
-import HeaderDropDowns from './HeaderDropDowns';
+import { NotificationIcon, MenuIcon, EnvelopeOpenIcon } from "components/icons";
+import { Container, Spacing } from "components/Layout";
+import { A } from "components/Text";
+import Avatar from "components/Avatar";
+import Search from "components/Search";
+import HeaderDropDowns from "./HeaderDropDowns";
 
-import { useClickOutside } from 'hooks/useClickOutside';
+import { useClickOutside } from "hooks/useClickOutside";
 
-import { useStore } from 'store';
+import { useStore } from "store";
 
-import { HEADER_HEIGHT } from 'constants/Layout';
-import SiteInfo from 'constants/SiteInfo.json';
+import { HEADER_HEIGHT } from "constants/Layout";
+import SiteInfo from "constants/SiteInfo.json";
 
-import * as Routes from 'routes';
+import * as Routes from "routes";
 
-const Root = styled(Container)`
+
+const NavWrapper = styled.div`
   position: sticky;
-  top: 0;
-  background-color: ${p => p.theme.colors.white};
-  z-index: ${p => p.theme.zIndex.md};
+  display: flex;
+  flex-direction: row no-wrap;
+  align-items: center;
+  justify-content: flex-end;
   height: ${HEADER_HEIGHT}px;
-  border-bottom: 1px solid ${p => p.theme.colors.border.main};
-
-  @media (min-width: ${p => p.theme.screen.md}) {
-    z-index: ${p => p.theme.zIndex.md};
-  }
+  background-color: #198fd2;
+  width: 100vw;
 `;
 
-const Wrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  height: ${HEADER_HEIGHT}px;
-  margin: 0 auto;
-  width: 100%;
-
-  @media (min-width: ${p => parseInt(p.theme.screen.lg, 10) + 20 + 'px'}) {
-    width: ${p => p.theme.screen.lg};
-  }
-`;
-
-const LeftSide = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+const SearchWrapper = styled.div`
+  width: 200px;
 `;
 
 const Hamburger = styled.div`
   cursor: pointer;
 
-  @media (min-width: ${p => p.theme.screen.md}) {
+  @media (min-width: ${(p) => p.theme.screen.md}) {
     display: none;
   }
 `;
 
+const Button = styled.div`
+  height: 100%;
+  width: 100%;
+  padding-right: 15px;
+
+`;
+
 const Logo = styled(A)`
   display: none;
-  color: ${p => p.theme.colors.primary.main};
-  font-weight: ${p => p.theme.font.weight.bold};
-  font-size: ${p => p.theme.font.size.sm};
+  color: ${(p) => p.theme.colors.primary.main};
+  font-weight: ${(p) => p.theme.font.weight.bold};
+  font-size: ${(p) => p.theme.font.size.sm};
 
   &:hover {
-    color: ${p => p.theme.colors.primary.main};
+    color: ${(p) => p.theme.colors.primary.main};
   }
 
-  @media (min-width: ${p => p.theme.screen.md}) {
+  @media (min-width: ${(p) => p.theme.screen.md}) {
     display: block;
   }
 `;
 
-const RightSide = styled.div`
+const UserContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  position: relative;
-`;
-
-const countCSS = css`
-  top: -6px;
-  position: absolute;
-  height: 22px;
-  width: 22px;
-  padding: 2px;
-  letter-spacing: -1px;
-  border-radius: 50%;
-  color: ${p => p.theme.colors.white};
-  background-color: ${p => p.theme.colors.error.main};
-  font-size: ${p => p.theme.font.size.xxs};
-  display: flex;
-  flex-direction: row;
   justify-content: center;
+`;
+
+const LeftSection = styled.div`
+  display: flex;
+  height: 100%;
+  flex-direction: row;
   align-items: center;
+  justify-content: flex-end;
+  width: 70%;
+  background-color: #198fd2;
+  padding-right: 15px;
+
 `;
 
-const NotificationCount = styled.span`
-  ${countCSS};
-  right: 54px;
+const RightSection = styled.div`
+  display: flex;
+  height: 100%;
+  width: 30%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: #373737; 
+  padding-right: 15px;
 `;
 
-const MessageCount = styled.span`
-  ${countCSS};
-  right: 100px;
+const UserName = styled.div`
+  font-family: proxima-nova;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  padding-right: 15px;
+  color: #ffffff;
+
+  @media (max-width: 700px) {
+    display: none;
+  }
 `;
 
 /**
@@ -143,13 +140,13 @@ const Header = ({ location, toggleSideBar }) => {
     return () => closeDropDown();
   }, [location.pathname]);
 
-  const handleIconClick = dropdownType => {
+  const handleIconClick = (dropdownType) => {
     if (dropdownOpen) {
       closeDropDown();
     } else {
-      if (dropdownType === 'NOTIFICATION') {
+      if (dropdownType === "NOTIFICATION") {
         setDropdownData(auth.user.newNotifications);
-      } else if (dropdownType === 'MESSAGE') {
+      } else if (dropdownType === "MESSAGE") {
         setDropdownData(auth.user.newConversations);
       }
 
@@ -158,57 +155,38 @@ const Header = ({ location, toggleSideBar }) => {
   };
 
   return (
-    <Root>
-      <Wrapper>
-        <LeftSide>
+    <>
+      <NavWrapper>
+        <LeftSection>
+           {/*code to disaply site name  <Logo to={Routes.HOME}>{SiteInfo.name}</Logo>*/}
+          <SearchWrapper>
+            {" "}
+            <Search location={location} placeholder="Search" />
+          </SearchWrapper>
+        </LeftSection>
+        <RightSection>
+          <UserContainer>
+            <UserName>
+              <p>{auth.user.username}</p>
+            </UserName>
+            <Button ghost onClick={() => handleIconClick("USER")}>
+              <Avatar image={auth.user.image} size={40} />
+            </Button>
+            <HeaderDropDowns
+              messageRef={messageRef}
+              notificationRef={notificationRef}
+              userRef={userRef}
+              dropdownOpen={dropdownOpen}
+              dropdownData={dropdownData}
+              closeDropDown={closeDropDown}
+            />
+          </UserContainer>
           <Hamburger onClick={toggleSideBar}>
             <MenuIcon />
           </Hamburger>
-
-          <Logo to={Routes.HOME}>{SiteInfo.name}</Logo>
-
-          <Spacing left="sm" right="md">
-            <Search location={location} placeholder="Search" />
-          </Spacing>
-        </LeftSide>
-
-        <RightSide>
-          <Spacing right="md">
-            <Button ghost onClick={() => handleIconClick('MESSAGE')}>
-              {auth.user.newConversations.length > 0 && (
-                <MessageCount>{auth.user.newConversations.length}</MessageCount>
-              )}
-
-              <EnvelopeOpenIcon />
-            </Button>
-          </Spacing>
-
-          <Spacing right="md">
-            <Button ghost onClick={() => handleIconClick('NOTIFICATION')}>
-              {auth.user.newNotifications.length > 0 && (
-                <NotificationCount>
-                  {auth.user.newNotifications.length}
-                </NotificationCount>
-              )}
-              <NotificationIcon />
-            </Button>
-          </Spacing>
-
-          <Button ghost onClick={() => handleIconClick('USER')}>
-            <Avatar image={auth.user.image} />
-          </Button>
-        </RightSide>
-
-        <HeaderDropDowns
-          messageRef={messageRef}
-          notificationRef={notificationRef}
-          userRef={userRef}
-          dropdownOpen={dropdownOpen}
-          dropdownData={dropdownData}
-          closeDropDown={closeDropDown}
-        />
-      </Wrapper>
-    </Root>
+        </RightSection>
+      </NavWrapper>
+    </>
   );
 };
 

@@ -11,7 +11,7 @@ import { NOTIFICATION_CREATED_OR_DELETED } from 'graphql/notification';
 import Message from 'components/Message';
 import { Loading } from 'components/Loading';
 import AuthLayout from 'pages/Auth/AuthLayout';
-import AppLayout from './AppLayout';
+import AppLayout from '../AppLayout/AppLayout';
 import ScrollToTop from './ScrollToTop';
 
 import { useStore } from 'store';

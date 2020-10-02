@@ -9,7 +9,7 @@ import theme from 'theme';
  */
 export const MenuIcon = ({ width, color }) => {
   const DEFAULT_WIDTH = '18';
-  const DEFAULT_COLOR = theme.colors.text.secondary;
+  const DEFAULT_COLOR = 'white';
 
   return (
     <svg

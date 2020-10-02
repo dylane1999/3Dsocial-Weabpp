@@ -24,6 +24,7 @@ import * as Routes from 'routes';
 const Root = styled(Container)`
   margin-top: ${p => p.theme.spacing.lg};
   margin-bottom: ${p => p.theme.spacing.sm};
+  width: 60vw;
 
   @media (min-width: ${p => p.theme.screen.lg}) {
     margin-left: ${p => p.theme.spacing.lg};
@@ -33,9 +34,15 @@ const Root = styled(Container)`
 
 const PostsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 3fr));
+  grid-template-columns: repeat(auto-fill, minmax(520px, 3fr));
   grid-auto-rows: auto;
   grid-gap: 20px;
+
+  @media (min-width: ${p => p.theme.screen.lg}) {
+    margin-left: ${p => p.theme.spacing.lg};
+    padding: 0;
+  }
+
 `;
 
 /**

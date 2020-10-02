@@ -1,41 +1,96 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
+import { Switch, Route, Redirect } from "react-router-dom";
+import styled from "styled-components";
 
-import { Overlay } from 'components/Layout';
-import { AuthHeader, SignUp, ForgotPassword, ResetPassword } from 'pages/Auth';
 
-import * as Routes from 'routes';
+import { AuthHeader, SignUp, ForgotPassword, ResetPassword } from "pages/Auth";
 
-import backgroundImage from './background.jpeg';
+import * as Routes from "routes";
+
+import LandingVector2 from "../../img/LandingVector2.svg";
+
+
+
+
+
+import ServiceSection from "../../components/ServiceSection/ServiceSection";
+import MoreInfoSection from "../../components/MoreInfoSection/MoreInfoSection";
+
 
 const Root = styled.div`
-  background: url(${backgroundImage}) no-repeat top / cover;
   width: 100%;
-  height: 100vh;
+  height: 100%;
 `;
 
 const Container = styled.div`
-  width: 100%;
   height: 100%;
+  width: 100%;
   position: relative;
-  z-index: ${p => p.theme.zIndex.lg};
+  z-index: ${(p) => p.theme.zIndex.lg};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  grid-area: c;
 
-  @media (min-width: ${p => p.theme.screen.md}) {
+  @media (min-width: ${(p) => p.theme.screen.md}) {
     justify-content: center;
+  }
+
+
+  @media (max-width: 400px) {
+    padding-bottom: 35px;
   }
 `;
 
 const Pages = styled.div`
-  margin-top: 80px;
 
-  @media (min-width: ${p => p.theme.screen.md}) {
-    margin-top: -120px;
+  @media (max-width: 1250px) {
+    margin-top: 50px;
   }
+`;
+
+
+const Grid = styled.div`
+  @media (max-width: 1250px) {
+    display: grid;
+    width: 100%;
+    background-color: #149bde;
+    height: 110%;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    justify-content: center;
+    grid-template-areas:
+      ".   c   c   c   c   c"
+      ".   c   c   c   c   c"
+      ".   c   c   c   c   c"
+      ".   c   c   c   c   c"
+      ".   c   c   c   c   c"
+      ".   c   c   c   c   c"
+      ".   .   .   .   .   ."
+      ".   .   .   .   .   .";
+  }
+
+  display: grid;
+  width: 100%;
+  height: 100vh;
+  background-color: #149bde;
+  background-image: url(${LandingVector2});
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-size: cover;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  justify-content: center;
+  grid-template-areas:
+    "c   c   c   c   c   c"
+    "c   c   c   c   c   c"
+    "c   c   c   c   c   c"
+    "c   c   c   c   c   c"
+    "c   c   c   c   c   c"
+    "c   c   c   c   c   c"
+    ".   .   .   .   .   ."
+    ".   .   .   .   .   .";
 `;
 
 /**
@@ -44,32 +99,33 @@ const Pages = styled.div`
 const AuthLayout = ({ refetch }) => {
   return (
     <Root>
-      <Overlay transparency="0.5" />
-
-      <Container>
-        <AuthHeader refetch={refetch} />
-
-        <Pages>
-          <Switch>
-            <Route
-              exact
-              path={Routes.HOME}
-              render={() => <SignUp refetch={refetch} />}
-            />
-            <Route
-              exact
-              path={Routes.FORGOT_PASSWORD}
-              component={ForgotPassword}
-            />
-            <Route
-              exact
-              path={Routes.RESET_PASSWORD}
-              render={() => <ResetPassword refetch={refetch} />}
-            />
-            <Redirect to={Routes.HOME} />
-          </Switch>
-        </Pages>
-      </Container>
+      <Grid>
+        <Container>
+          <AuthHeader refetch={refetch} />
+          <Pages>
+            <Switch>
+              <Route
+                exact
+                path={Routes.HOME}
+                render={() => <SignUp refetch={refetch} />}
+              />
+              <Route
+                exact
+                path={Routes.FORGOT_PASSWORD}
+                component={ForgotPassword}
+              />
+              <Route
+                exact
+                path={Routes.RESET_PASSWORD}
+                render={() => <ResetPassword refetch={refetch} />}
+              />
+              <Redirect to={Routes.HOME} />
+            </Switch>
+          </Pages>
+        </Container>
+      </Grid>
+      <ServiceSection></ServiceSection>
+      <MoreInfoSection></MoreInfoSection>
     </Root>
   );
 };

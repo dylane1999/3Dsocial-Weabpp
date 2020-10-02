@@ -30,6 +30,7 @@ const Link = styled(NavLink)`
 
     @media (min-width: ${p => p.theme.screen.md}) {
       background-color: ${p => p.theme.colors.white};
+      
     }
   }
 `;
@@ -47,8 +48,15 @@ const ListItem = styled.li`
   align-items: center;
 `;
 
+
+const Root = styled.div`
+  height: 100%
+`;
+
+
 const Name = styled.div`
   margin-left: ${p => p.theme.spacing.sm};
+  color: white; 
 `;
 
 /**
@@ -56,6 +64,7 @@ const Name = styled.div`
  */
 const Navigation = () => {
   return (
+    <Root>
     <List>
       <Link exact activeClassName="selected" to={Routes.HOME}>
         <ListItem>
@@ -66,7 +75,7 @@ const Navigation = () => {
 
       <Link exact activeClassName="selected" to={Routes.EXPLORE}>
         <ListItem>
-          <ExploreIcon width={20} />
+          <ExploreIcon />
           <Name>Explore</Name>
         </ListItem>
       </Link>
@@ -91,11 +100,12 @@ const Navigation = () => {
         to={generatePath(Routes.MESSAGES, { userId: Routes.NEW_ID_VALUE })}
       >
         <ListItem>
-          <EnvelopeIcon width={18} />
+          <EnvelopeIcon />
           <Name>Messages</Name>
         </ListItem>
       </Link>
     </List>
+    </Root>
   );
 };
 

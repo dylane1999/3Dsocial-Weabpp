@@ -13,13 +13,14 @@ const Label = styled.label`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 9px 14px;
   cursor: pointer;
   transition: background-color 0.1s;
-  font-weight: ${p => p.theme.font.weight.bold};
-  border-radius: ${p => p.theme.radius.lg};
-  background-color: ${p => p.theme.colors.grey[100]};
-  font-size: ${p => p.theme.font.size.xxs};
+  padding-right:32px;
+  padding-left:32px;
+  height: 40px;
+  background: #149BDE;
+  border-radius: 54px;
+  
 
   &:hover {
     background-color: ${p => p.theme.colors.grey[300]};
