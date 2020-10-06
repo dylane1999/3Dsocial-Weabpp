@@ -17,6 +17,7 @@ const Root = styled.div`
   overflow: auto; /* Enable scroll if needed */
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(20px);
+  
 `;
 
 
