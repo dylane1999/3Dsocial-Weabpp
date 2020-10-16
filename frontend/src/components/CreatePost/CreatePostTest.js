@@ -21,6 +21,6 @@ const CreatePostTest = () => {
       {isFocused ? <CreateFocused buttonClick={handleFocus} /> : <CreateUnfocused buttonClick={handleFocus}  />}
     </Root>
   );
-};
+};   
 
 export default CreatePostTest;

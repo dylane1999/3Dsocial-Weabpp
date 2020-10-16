@@ -22,7 +22,6 @@ import { HOME_PAGE_POSTS_LIMIT } from 'constants/DataLimit';
 
 import * as Routes from 'routes';
 
-import CreatePostTest from "../../components/CreatePost/CreatePostTest";
 
 const Empty = styled.div`
   padding: ${p => p.theme.spacing.sm};
@@ -67,7 +66,6 @@ const Home = () => {
       <Spacing top="lg" />
 
       <CreatePost />
-      <CreatePostTest/>
 
       <Query
         query={GET_FOLLOWED_POSTS}
