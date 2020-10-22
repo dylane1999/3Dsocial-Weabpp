@@ -96,18 +96,18 @@ const Grid = styled.div`
 /**
  * Main Layout for the app, when user isn't authenticated
  */
-const AuthLayout = ({ refetch }) => {
+const AuthLayout = () => {
   return (
     <Root>
       <Grid>
         <Container>
-          <AuthHeader refetch={refetch} />
+          <AuthHeader/>
           <Pages>
             <Switch>
               <Route
                 exact
                 path={Routes.HOME}
-                render={() => <SignUp refetch={refetch} />}
+                render={() => <SignUp />}
               />
               <Route
                 exact
@@ -117,7 +117,7 @@ const AuthLayout = ({ refetch }) => {
               <Route
                 exact
                 path={Routes.RESET_PASSWORD}
-                render={() => <ResetPassword refetch={refetch} />}
+                render={() => <ResetPassword />}
               />
               <Redirect to={Routes.HOME} />
             </Switch>
@@ -130,8 +130,5 @@ const AuthLayout = ({ refetch }) => {
   );
 };
 
-AuthLayout.propTypes = {
-  refetch: PropTypes.func.isRequired,
-};
 
 export default AuthLayout;

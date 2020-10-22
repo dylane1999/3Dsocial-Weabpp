@@ -54,7 +54,7 @@ const Home = () => {
   };
 
   const variables = {
-    userId: auth.user.id,
+ //   userId: auth.user.id,
     skip: 0,
     limit: HOME_PAGE_POSTS_LIMIT,
   };
@@ -67,86 +67,14 @@ const Home = () => {
 
       <CreatePost />
 
-      <Query
-        query={GET_FOLLOWED_POSTS}
-        variables={variables}
-        notifyOnNetworkStatusChange
-      >
-        {({ data, loading, fetchMore, networkStatus }) => {
-          if (loading && networkStatus === 1) {
-            return (
+
               <Skeleton
                 height={500}
                 bottom="lg"
                 top="lg"
                 count={HOME_PAGE_POSTS_LIMIT}
               />
-            );
-          }
 
-          const { posts, count } = data.getFollowedPosts;
-
-          if (!posts.length) {
-            return (
-              <Empty>
-                <StyledA to={generatePath(Routes.EXPLORE)}>
-                  Explore new posts
-                </StyledA>{' '}
-                or{' '}
-                <StyledA to={generatePath(Routes.PEOPLE)}>
-                  Find new people
-                </StyledA>
-              </Empty>
-            );
-          }
-
-          return (
-            <InfiniteScroll
-              data={posts}
-              dataKey="getFollowedPosts.posts"
-              count={parseInt(count)}
-              variables={variables}
-              fetchMore={fetchMore}
-            >
-              {data => {
-                const showNextLoading =
-                  loading && networkStatus === 3 && count !== data.length;
-
-                return (
-                  <Fragment>
-                    {data.map(post => (
-                      <Fragment key={post.id}>
-                        <Modal
-                          open={modalPostId === post.id}
-                          onClose={closeModal}
-                        >
-                          <PostPopup id={post.id} closeModal={closeModal} />
-                        </Modal>
-
-                        <Spacing bottom="lg" top="lg">
-                          <PostCard
-                            author={post.author}
-                            imagePublicId={post.imagePublicId}
-                            postId={post.id}
-                            comments={post.comments}
-                            createdAt={post.createdAt}
-                            title={post.title}
-                            image={post.image}
-                            likes={post.likes}
-                            openModal={() => openModal(post.id)}
-                          />
-                        </Spacing>
-                      </Fragment>
-                    ))}
-
-                    {showNextLoading && <Loading top="lg" />}
-                  </Fragment>
-                );
-              }}
-            </InfiniteScroll>
-          );
-        }}
-      </Query>
     </Container>
   );
 };

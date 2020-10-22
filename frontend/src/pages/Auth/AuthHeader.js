@@ -60,14 +60,14 @@ const SignInContainer = styled.div`
 /**
  * Header of the App when user isn't authenticated
  */
-const AuthHeader = ({ refetch }) => {
+const AuthHeader = () => {
   return (
     <Root>
       <StyledContainer maxWidth="lg">
         <Logo to={Routes.HOME}>{SiteInfo.name}</Logo>
 
         <SignInContainer>
-          <SignIn refetch={refetch} />
+          <SignIn />
         </SignInContainer>
       </StyledContainer>
     </Root>
@@ -75,7 +75,7 @@ const AuthHeader = ({ refetch }) => {
 };
 
 AuthHeader.propTypes = {
-  refetch: PropTypes.func.isRequired,
+  //refetch: PropTypes.func.isRequired,
 };
 
 export default AuthHeader;

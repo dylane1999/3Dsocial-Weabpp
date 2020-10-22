@@ -39,7 +39,7 @@ const ForgotPassword = styled.div`
 /**
  * Sign In page
  */
-const SignIn = ({ history, location, refetch }) => {
+const SignIn = ({ history, location }) => {
   const [values, setValues] = useState({ emailOrUsername: '', password: '' });
   const [error, setError] = useState('');
 
@@ -52,21 +52,6 @@ const SignIn = ({ history, location, refetch }) => {
     setValues({ ...values, [name]: value });
   };
 
-  const handleSubmit = (e, signin) => {
-    e.preventDefault();
-
-    if (!emailOrUsername || !password) {
-      setError('All fields are required');
-      return;
-    }
-
-    setError('');
-    signin().then(async ({ data }) => {
-      localStorage.setItem('token', data.signin.token);
-      await refetch();
-      history.push(Routes.HOME);
-    });
-  };
 
   const renderErrors = apiError => {
     let errorMessage;
@@ -98,7 +83,7 @@ const SignIn = ({ history, location, refetch }) => {
       variables={{ input: { emailOrUsername, password } }}
     >
       {(signin, { loading, error: apiError }) => (
-        <form onSubmit={e => handleSubmit(e, signin)}>
+        <form >
           <Root>
             <InputContainer>
               {renderErrors(apiError)}
@@ -108,7 +93,7 @@ const SignIn = ({ history, location, refetch }) => {
                 type="text"
                 name="emailOrUsername"
                 values={emailOrUsername}
-                onChange={handleChange}
+             //   onChange={handleChange}
                 placeholder="Email or Username"
                 borderColor="white"
               />
@@ -119,7 +104,7 @@ const SignIn = ({ history, location, refetch }) => {
                 type="password"
                 name="password"
                 values={password}
-                onChange={handleChange}
+             //   onChange={handleChange}
                 placeholder="Password"
                 borderColor="white"
               />
@@ -138,7 +123,7 @@ const SignIn = ({ history, location, refetch }) => {
 
 SignIn.propTypes = {
   history: PropTypes.object.isRequired,
-  refetch: PropTypes.func.isRequired,
+  //refetch: PropTypes.func.isRequired,
 };
 
 export default withRouter(SignIn);

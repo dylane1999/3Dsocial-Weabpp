@@ -19,6 +19,8 @@ import SiteInfo from "constants/SiteInfo.json";
 
 import * as Routes from "routes";
 
+import defaultPic from "../../../img/default-pic.png"
+
 
 const NavWrapper = styled.div`
   position: sticky;
@@ -167,10 +169,10 @@ const Header = ({ location, toggleSideBar }) => {
         <RightSection>
           <UserContainer>
             <UserName>
-              <p>{auth.user.username}</p>
+              <p>username change</p>
             </UserName>
             <Button ghost onClick={() => handleIconClick("USER")}>
-              <Avatar image={auth.user.image} size={40} />
+              <Avatar image={defaultPic} size={40} />
             </Button>
             <HeaderDropDowns
               messageRef={messageRef}

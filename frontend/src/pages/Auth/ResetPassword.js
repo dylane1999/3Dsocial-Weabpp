@@ -42,36 +42,8 @@ const ResetPassword = ({ history, location, refetch }) => {
   const [values, setValues] = useState({ password: '', confirmPassword: '' });
   const [error, setError] = useState('');
 
-  const handleChange = e => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  };
 
-  const handleSubmit = (e, resetPassword) => {
-    e.preventDefault();
 
-    if (!password || !confirmPassword) {
-      setError('Enter password and Confirm password.');
-      return;
-    } else if (password.length < 6) {
-      setError('Password min 6 characters');
-      return;
-    } else if (password !== confirmPassword) {
-      setError("Passwords don't match.");
-      return;
-    }
-
-    setError('');
-    resetPassword()
-      .then(async ({ data }) => {
-        localStorage.setItem('token', data.resetPassword.token);
-        await refetch();
-        history.push(Routes.HOME);
-      })
-      .catch(err => {
-        setError(err);
-      });
-  };
 
   const { password, confirmPassword } = values;
 
@@ -104,12 +76,12 @@ const ResetPassword = ({ history, location, refetch }) => {
                         <H1>Password Reset</H1>
                       </Spacing>
 
-                      <form onSubmit={e => handleSubmit(e, resetPassword)}>
+                      <form >
                         <InputText
                           type="password"
                           name="password"
-                          values={password}
-                          onChange={handleChange}
+                        ///  values={password}
+                        //  onChange={handleChange}
                           placeholder="Password"
                         />
 
@@ -117,8 +89,8 @@ const ResetPassword = ({ history, location, refetch }) => {
                           <InputText
                             type="password"
                             name="confirmPassword"
-                            values={confirmPassword}
-                            onChange={handleChange}
+                           // values={confirmPassword}
+                            //onChange={handleChange}
                             placeholder="Confirm Password"
                           />
                         </Spacing>
@@ -146,7 +118,7 @@ const ResetPassword = ({ history, location, refetch }) => {
 ResetPassword.propTypes = {
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  refetch: PropTypes.func.isRequired,
+  //refetch: PropTypes.func.isRequired,
 };
 
 export default withRouter(ResetPassword);

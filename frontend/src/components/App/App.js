@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, lazy, Suspense, useEffect} from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -15,11 +15,15 @@ import AppLayout from '../AppLayout/AppLayout';
 import ScrollToTop from './ScrollToTop';
 
 import { useStore } from 'store';
+import useUser from "../../hooks/useUser"
 
 /**
  * Root component of the app
  */
 const App = () => {
+  const [currentUser, setCurrentUser] = useState();
+  useUser(setCurrentUser);
+//NEW ^^
   const [{ message }] = useStore();
 
   const { loading, subscribeToMore, data, refetch } = useQuery(GET_AUTH_USER);
@@ -117,13 +121,13 @@ const App = () => {
 
       <ScrollToTop>
         <Switch>
-          {data.getAuthUser ? (
+          {currentUser  ? (
             <Route
               exact
-              render={() => <AppLayout authUser={data.getAuthUser} />}
+              render={() => <AppLayout authUser={currentUser} />}
             />
           ) : (
-            <Route exact render={() => <AuthLayout refetch={refetch} />} />
+            <Route exact render={() => <AuthLayout />} />
           )}
         </Switch>
       </ScrollToTop>
@@ -141,3 +145,11 @@ const App = () => {
 };
 
 export default App;
+
+
+
+//<ScrollToTop>
+
+//<Route exact render={() => <AuthLayout refetch={refetch} />} />
+
+//</ScrollToTop>

@@ -1,45 +1,102 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
-import { Spacing } from 'components/Layout';
-import { LikeIcon, PostCommentIcon } from 'components/icons';
+import { Spacing } from "components/Layout";
+import { LikeIcon, PostCommentIcon } from "components/icons";
 
 const Overlay = styled.div`
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 50vw;
+  height: 400px;
   top: 0;
   bottom: 0;
-  opacity: 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   transition: opacity 0.3s, visibility 0.3s;
-  background-color: rgba(0, 0, 0, 0.3);
-  color: ${p => p.theme.colors.white};
+  background: linear-gradient(
+    180deg,
+    #000000 -19.64%,
+    rgba(0, 0, 0, 0) 1.67%,
+    rgba(20, 155, 222, 0.5) 96.24%
+  );
+  color: ${(p) => p.theme.colors.white};
 `;
 
 const Root = styled.div`
   width: 100%;
   position: relative;
   cursor: pointer;
-  border-radius: ${p => p.theme.radius.sm};
+  border-radius: ${(p) => p.theme.radius.sm};
   overflow: hidden;
 
   &:hover ${Overlay} {
-    opacity: 1;
+    opacity: 0;
   }
 `;
 
 const Photo = styled.div`
-  width: 100%;
-  height: 300px;
+  width: 50vw;
+  height: 400px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-color: ${p => p.theme.colors.grey[300]};
+  background-color: ${(p) => p.theme.colors.grey[300]};
+`;
+
+const BottomWrapper = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 25px;
+`;
+
+const Icons = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 25px;
+`;
+
+const LikeIconWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+`;
+
+const CommentIconWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+`;
+
+const Title = styled.div`
+  color: white;
+  font-size: 20px;
+`;
+
+const Description = styled.div`
+  color: white;
+  font-size: 16px;
+`;
+
+const PostInfo = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
 `;
 
 /**
@@ -66,15 +123,30 @@ const ExploreCard = ({ openPostPopup, image, countLikes, countComments }) => {
       <Photo style={imageLoaded ? { backgroundImage: `url(${image})` } : {}} />
 
       <Overlay onClick={openPostPopup}>
-        <LikeIcon color="white" />
+        <BottomWrapper>
+          <PostInfo>
+            <Title>
+              title
+            </Title>
+            <Description>
+              Description
+            </Description>
+          </PostInfo>
 
-        <Spacing left="xs" right="lg">
-          {countLikes}
-        </Spacing>
+          <Icons>
+            <LikeIconWrapper>
+              <LikeIcon color="white" />
+              <Spacing left="xs" right="lg">
+                {countLikes}
+              </Spacing>
+            </LikeIconWrapper>
+            <CommentIconWrapper>
+              <PostCommentIcon color="white" />
+              <Spacing left="xs">{countComments}</Spacing>
+            </CommentIconWrapper>
+          </Icons>
 
-        <PostCommentIcon color="white" />
-
-        <Spacing left="xs">{countComments}</Spacing>
+        </BottomWrapper>
       </Overlay>
     </Root>
   );

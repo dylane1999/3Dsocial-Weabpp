@@ -129,12 +129,12 @@ const CreatePost = () => {
   return (
     <Mutation
       mutation={CREATE_POST}
-      variables={{ input: { title, image, authorId: auth.user.id } }}
+     // variables={{ input: { title, image, authorId: auth.user.id } }}
       refetchQueries={() => [
         {
           query: GET_FOLLOWED_POSTS,
           variables: {
-            userId: auth.user.id,
+          //  userId: auth.user.id,
             skip: 0,
             limit: HOME_PAGE_POSTS_LIMIT,
           },
@@ -143,7 +143,7 @@ const CreatePost = () => {
         {
           query: GET_USER_POSTS,
           variables: {
-            username: auth.user.username,
+         //  username: auth.user.username,
             skip: 0,
             limit: PROFILE_PAGE_POSTS_LIMIT,
           },
@@ -179,7 +179,7 @@ const CreatePost = () => {
                     placeholder="Add a post"
                   />
 
-                  <Avatar image={auth.user.image} size={40} />
+                  <Avatar  size={40} />
                 </Wrapper>
 
                 {image && (

@@ -43,77 +43,15 @@ const ProfilePosts = ({ username }) => {
   const variables = { username, skip: 0, limit: PROFILE_PAGE_POSTS_LIMIT };
 
   return (
-    <Query
-      query={GET_USER_POSTS}
-      variables={variables}
-      notifyOnNetworkStatusChange
-    >
-      {({ data, loading, fetchMore, networkStatus }) => {
-        if (loading && networkStatus === 1) {
-          return (
+
             <Skeleton
               height={500}
               bottom="lg"
               top="lg"
               count={PROFILE_PAGE_POSTS_LIMIT}
             />
-          );
-        }
 
-        const { posts, count } = data.getUserPosts;
 
-        if (!posts.length > 0) {
-          return (
-            <Spacing bottom="lg">
-              <Empty text="No posts yet." />
-            </Spacing>
-          );
-        }
-
-        return (
-          <InfiniteScroll
-            data={posts}
-            dataKey="getUserPosts.posts"
-            count={parseInt(count)}
-            variables={variables}
-            fetchMore={fetchMore}
-          >
-            {data => {
-              return data.map((post, i) => {
-                const showNextLoading =
-                  loading && networkStatus === 3 && data.length - 1 === i;
-
-                return (
-                  <Fragment key={post.id}>
-                    {modalPostId === post.id && (
-                      <Modal open={isPostPopupOpen} onClose={closeModal}>
-                        <PostPopup id={post.id} closeModal={closeModal} />
-                      </Modal>
-                    )}
-
-                    <Spacing bottom="lg">
-                      <PostCard
-                        author={post.author}
-                        postId={post.id}
-                        imagePublicId={post.imagePublicId}
-                        comments={post.comments}
-                        title={post.title}
-                        image={post.image}
-                        likes={post.likes}
-                        createdAt={post.createdAt}
-                        openModal={() => openModal(post.id)}
-                      />
-                    </Spacing>
-
-                    {showNextLoading && <Loading top="lg" />}
-                  </Fragment>
-                );
-              });
-            }}
-          </InfiniteScroll>
-        );
-      }}
-    </Query>
   );
 };
 

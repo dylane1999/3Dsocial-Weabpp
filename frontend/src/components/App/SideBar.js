@@ -84,8 +84,8 @@ const CreatePostWrapper = styled.div`
 const SideBar = ({ location, isOpen, sideBarRef }) => {
   const [{ auth }] = useStore();
 
-  const isAuthUsersProfilePage =
-    auth.user.username === location.pathname.substring(1);
+ // const isAuthUsersProfilePage =
+    //auth.user.username === location.pathname.substring(1);
 
   return (
     <Root isOpen={isOpen} ref={sideBarRef}>

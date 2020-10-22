@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { withRouter } from "react-router-dom";
-import { Mutation } from "react-apollo";
 
 import { Spacing, Container } from "components/Layout";
 import { H1, Error } from "components/Text";
 import { InputText } from "components/Form";
 import Head from "components/Head";
-
-import { SIGN_UP } from "graphql/user";
 
 import * as Routes from "routes";
 
@@ -24,6 +21,8 @@ import PrinterIcon from "../../img/PrinterIcon.svg";
 import MobileStyledCard from "components/MobileCard/MobileStyledCard";
 
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { Formik } from "formik";
+import { auth, createUserDoc } from "../../Firebase/Firebase";
 
 const useStyles = makeStyles({
   root: {
@@ -52,6 +51,28 @@ const Root = styled(Container)`
   }
 `;
 
+const StyledText = styled.p`
+  display: inline;
+  font-size: 1.1rem;
+  font-weight: ${({ theme }) => theme.regular};
+  color: ${({ theme }) => theme.fontColorText};
+  line-height: 1.7rem;
+  ${({ errorMessage }) =>
+    errorMessage &&
+    css`
+      color: red;
+      font-size: 0.9rem;
+      min-width: 200px;
+      text-align: center;
+    `};
+
+  ${({ comment }) =>
+    comment &&
+    css`
+      padding-right: 3rem;
+    `};
+`;
+
 const Welcome = styled.div`
   padding: 5.5rem;
   height: 40rem;
@@ -66,9 +87,8 @@ const Welcome = styled.div`
   }
 `;
 
-const IntroCard = styled.div`;
-
-
+const IntroCard = styled.div`
+   ;
 `;
 
 const Heading = styled(H1)`
@@ -104,85 +124,39 @@ const Form = styled.div`
  * Sign Up page
  */
 
-const SignUp = ({ history, refetch }) => {
-  const [error, setError] = useState("");
-  const [values, setValues] = useState({
-    fullName: "",
-    username: "",
-    email: "",
-    password: "",
+const SignUp = () => {
+  const [newAccount, setNewAccount] = useState(false);
+  const [isLoaderVisible, setLoaderVisibility] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoaderVisibility(false);
+    }, 1200);
+    return () => clearTimeout(timer);
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  };
-
-  const validate = () => {
-    if (!fullName || !email || !username || !password) {
-      return "All fields are required";
-    }
-
-    if (fullName.length > 50) {
-      return "Full name no more than 50 characters";
-    }
-
-    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!emailRegex.test(String(email).toLowerCase())) {
-      return "Enter a valid email address.";
-    }
-
-    const usernameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/;
-    if (!usernameRegex.test(username)) {
-      return "Usernames can only use letters, numbers, underscores and periods";
-    } else if (username.length > 20) {
-      return "Username no more than 50 characters";
-    }
-
-    if (password.length < 6) {
-      return "Password min 6 characters";
-    }
-
-    return false;
-  };
-
-  const handleSubmit = (e, signup) => {
+  const handleNewAccount = (e) => {
     e.preventDefault();
-
-    const error = validate();
-    if (error) {
-      setError(error);
-      return false;
-    }
-
-    signup().then(async ({ data }) => {
-      localStorage.setItem("token", data.signup.token);
-      await refetch();
-      history.push(Routes.HOME);
-    });
+    setNewAccount((prevState) => !prevState);
   };
 
-  const renderErrors = (apiError) => {
-    let errorMessage;
-
-    if (error) {
-      errorMessage = error;
-    } else if (apiError) {
-      errorMessage = apiError.graphQLErrors[0].message;
-    }
-
-    if (errorMessage) {
-      return (
-        <Spacing bottom="sm" top="sm">
-          <Error>{errorMessage}</Error>
-        </Spacing>
+  const handleSignIn = (email, password) => {
+    auth
+      .signInWithEmailAndPassword(email, password)
+      /* eslint-disable */
+      .catch(() =>
+        alert(`Your email or password is incorrect, please check your data`)
       );
-    }
-
-    return null;
   };
 
-  const { fullName, email, password, username } = values;
+  const handleSignUp = async (email, password, displayName, fullName) => {
+    const { user } = await auth
+      .createUserWithEmailAndPassword(email, password)
+      .catch(() => alert(`Email is already in use, sign in or use other email`));
+    createUserDoc(user, displayName, fullName);
+  };
+  //end of borrowed code
+
   const classes = useStyles();
 
   const screenLarge = useMediaQuery("(min-width: 1050px)");
@@ -219,115 +193,158 @@ const SignUp = ({ history, refetch }) => {
   };
 
   return (
-    <Mutation
-      mutation={SIGN_UP}
-      variables={{ input: { fullName, email, password, username } }}
-    >
-      {(signup, { loading, error: apiError }) => {
-        return (
-          <Root maxWidth="lg">
-            <Head />
-            <Box
-              justifyContent="center"
-              alignContent="center"
-              display="flex"
-              flexDirection={GetHeroScreenSize()}
-              p={1}
-              m={1}
-            >
-              <IntroCard>
-                <Box>
-                  <Welcome>{GetCardType()}</Welcome>
-                </Box>
-              </IntroCard>
-
-              <Box>
-                <Form>
-                  <Spacing bottom="md">
-                    <CalltoAction>Create Account</CalltoAction>
-                  </Spacing>
-
-                  <form onSubmit={(e) => handleSubmit(e, signup)}>
-                    <Box
-                      justifyContent="center"
-                      alignContent="center"
-                      display="flex"
-                      flexDirection="column"
-                    >
-                      <Box>
-                        <p>Full name</p>
-                        <InputText
-                          type="text"
-                          name="fullName"
-                          values={fullName}
-                          onChange={handleChange}
-                          placeholder="John Smith"
-                          borderColor="white"
-                        />
-                      </Box>
-                      <Box>
-                        <Spacing top="xs" bottom="xs">
-                          <p>Email</p>
-                          <InputText
-                            type="text"
-                            name="email"
-                            values={email}
-                            onChange={handleChange}
-                            placeholder="Example@gmail.com"
-                            borderColor="white"
-                          />
-                        </Spacing>
-                      </Box>
-                      <Box>
-                        <p>Username</p>
-
-                        <InputText
-                          type="text"
-                          name="username"
-                          values={username}
-                          onChange={handleChange}
-                          placeholder="Example_Username"
-                          borderColor="white"
-                        />
-                      </Box>
-                      <Box>
-                        <Spacing top="xs" bottom="xs">
-                          <p>Password</p>
-
-                          <InputText
-                            type="password"
-                            name="password"
-                            values={password}
-                            onChange={handleChange}
-                            placeholder="4-18 Characters"
-                            borderColor="white"
-                          />
-                        </Spacing>
-                      </Box>
-                    </Box>
-
-                    {renderErrors(apiError)}
-
-                    <Spacing top="sm" />
-
-                    <Button type="submit" className={classes.root}>
-                      {" "}
-                      Sign Up{" "}
-                    </Button>
-                  </form>
-                </Form>
-              </Box>
-            </Box>
-          </Root>
-        );
+    <Formik
+      initialValues={{ email: "your@email.com", password: "yourPassword1", displayName: "UserName", fullName: "full name" }}
+      validate={({ email, password, displayName }) => {
+        const errors = {};
+        if (!email) {
+          errors.email = "Email is required";
+        } else if (!password) {
+          errors.password = "Password is required";
+        } else if (!displayName) {
+          errors.password = "USernName is required";
+        } else if (!fullName) {
+          errors.password = "Full name is required";
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+          errors.email = "Invalid email address";
+        } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/i.test(password)) {
+          errors.password =
+            "Password should contain min. 6 characters and one number";
+        }
+        return errors;
       }}
-    </Mutation>
-  );
-};
+      onSubmit={({ email, password, displayName, fullName }) =>
+        handleSignUp(email, password, displayName, fullName)
+      }
+    >
+      {({
+        values: { email, password, displayName, fullName },
+        errors,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+      }) => (
+        <Root maxWidth="lg">
+          <Head />
+          <Box
+            justifyContent="center"
+            alignContent="center"
+            display="flex"
+            flexDirection={GetHeroScreenSize()}
+            p={1}
+            m={1}
+          >
+            <IntroCard>
+              <Box>
+                <Welcome>{GetCardType()}</Welcome>
+              </Box>
+            </IntroCard>
 
-SignUp.propTypes = {
-  history: PropTypes.object.isRequired,
-  refetch: PropTypes.func.isRequired,
+            <Box>
+              <Form>
+                <Spacing bottom="md">
+                  <CalltoAction>Create Account</CalltoAction>
+                </Spacing>
+
+                <form onSubmit={handleSubmit}>
+                  <Box
+                    justifyContent="center"
+                    alignContent="center"
+                    display="flex"
+                    flexDirection="column"
+                  >
+                    <Box>
+                      <p>Full name</p>
+                      <InputText
+                        id="fullName"
+                        placeholder="fullName"
+                        type="text"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        name="fullName"
+                        value={fullName}
+                        aria-label="fullName"
+                        aria-required="true"
+                        autoComplete="new-password"
+                      />
+                    </Box>
+                    <Box>
+                      <Spacing top="xs" bottom="xs">
+                        <p>Email</p>
+                        <InputText
+                          id="email"
+                          placeholder="email"
+                          type="email"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          name="email"
+                          value={email}
+                          aria-label="email"
+                          aria-required="true"
+                          autoComplete="new-password"
+                        />
+                        {errors.email && (
+                          <StyledText errorMessage>{errors.email}</StyledText>
+                        )}
+                      </Spacing>
+                    </Box>
+                    <Box>
+                      <p>Display Name</p>
+
+                      <InputText
+                        id="displayName"
+                        placeholder="name"
+                        type="text"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        name="displayName"
+                        value={displayName}
+                        aria-label="displayName"
+                        aria-required="true"
+                        autoComplete="new-password"
+                      />
+                      {errors.displayName && (
+                        <StyledText errorMessage>
+                          {errors.displayName}
+                        </StyledText>
+                      )}
+                    </Box>
+                    <Box>
+                      <Spacing top="xs" bottom="xs">
+                        <p>Password</p>
+
+                        <InputText
+                          id="password"
+                          placeholder="password"
+                          type="password"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          name="password"
+                          value={password}
+                          aria-label="password"
+                          aria-required="true"
+                          autoComplete="new-password"
+                        />
+                        {errors.password && (
+                          <StyledText errorMessage>{errors.password}</StyledText>
+                        )}
+                      </Spacing>
+                    </Box>
+                  </Box>
+
+                  <Spacing top="sm" />
+
+                  <Button type="submit" className={classes.root}>
+                    Sign Up
+                  </Button>
+                </form>
+              </Form>
+            </Box>
+          </Box>
+        </Root>
+      )}
+    </Formik>
+  );
 };
 
 export default withRouter(SignUp);

@@ -47,54 +47,10 @@ const People = () => {
 
   return (
     <Root maxWidth="md">
-      <Head title="Find new People" />
-
-      <Query
-        query={GET_USERS}
-        variables={variables}
-        notifyOnNetworkStatusChange
-      >
-        {({ data, loading, fetchMore, networkStatus }) => {
-          if (loading && networkStatus === 1) {
-            return (
               <PeopleContainer>
                 <Skeleton height={280} count={PEOPLE_PAGE_USERS_LIMIT} />
               </PeopleContainer>
-            );
-          }
 
-          const { users, count } = data.getUsers;
-
-          if (!users.length > 0) return <Empty text="No people yet." />;
-
-          return (
-            <InfiniteScroll
-              data={users}
-              dataKey="getUsers.users"
-              count={parseInt(count)}
-              variables={variables}
-              fetchMore={fetchMore}
-            >
-              {data => {
-                const showNextLoading =
-                  loading && networkStatus === 3 && count !== data.length;
-
-                return (
-                  <Fragment>
-                    <PeopleContainer>
-                      {data.map(user => (
-                        <PeopleCard key={user.id} user={user} />
-                      ))}
-                    </PeopleContainer>
-
-                    {showNextLoading && <Loading top="lg" />}
-                  </Fragment>
-                );
-              }}
-            </InfiniteScroll>
-          );
-        }}
-      </Query>
     </Root>
   );
 };

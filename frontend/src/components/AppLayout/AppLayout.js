@@ -134,7 +134,7 @@ const AppLayout = ({ location, authUser }) => {
     };
   }, [location.pathname, isDesktop]);
 
-  if (!auth.user) return null;
+ // if (!auth.user) return null;
 
   const GetSidebarMarginSize = () => {
     if (screenLarge) {
@@ -166,7 +166,7 @@ const AppLayout = ({ location, authUser }) => {
         <HeroImage>
           <HeroContent>
             <HeroModelName>Model of the week</HeroModelName>
-            <HeroModelCreator imageInfo={auth.user.image} AuthorName={"John Smith"} PostType={"Product Packaging"}></HeroModelCreator>
+            <HeroModelCreator  AuthorName={"John Smith"} PostType={"Product Packaging"}></HeroModelCreator>
           </HeroContent>
         </HeroImage>{" "}
       </Hero>

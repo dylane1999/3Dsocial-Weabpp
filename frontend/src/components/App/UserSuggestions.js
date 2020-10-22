@@ -57,7 +57,7 @@ const FullName = styled.div`
 `;
 
 const UserName = styled.div`
-  color: #DCDCDC;
+  color: #dcdcdc;
   font-family: proxima-nova;
 `;
 
@@ -82,51 +82,32 @@ const UserSuggestions = ({ pathname }) => {
   //  if (hideUserSuggestions) return null;
 
   return (
-    <Query query={USER_SUGGESTIONS} variables={{ userId: auth.user.id }}>
-      {({ data, loading }) => {
-        if (loading)
-          return (
-            <Root>
-              <Loading />
-            </Root>
-          );
+    //<Query query={USER_SUGGESTIONS} variables={{ userId: auth.user.id }}>
+    //</Query> {({ data, loading }) => {
+    //   if (loading)
+    //     return (
+    // /        <Root>
+    //         <Loading />
+    //        </Root>
+    //      );
 
-        if (!data.suggestPeople.length > 0) {
-          return null;
-        }
+    //    if (!data.suggestPeople.length > 0) {
+    //      return null;
+    //   }
 
-        return (
-          <Root>
-            <Heading>Suggestions</Heading>
+    //    return (
+    <Root>
+      <Heading>Suggestions</Heading>
 
-            <List>
-              {data.suggestPeople.map((user) => (
-                <ListItem key={user.id}>
-                  <A
-                    to={generatePath(Routes.USER_PROFILE, {
-                      username: user.username,
-                    })}
-                  >
-                    <Avatar image={user.image} size={50} />
-                  </A>
+      <List>
+          <ListItem >
+              <Avatar  size={50} />
 
-                  <Spacing left="xs">
-                    <A
-                      to={generatePath(Routes.USER_PROFILE, {
-                        username: user.username,
-                      })}
-                    >
-                      <FullName>{user.fullName}</FullName>
-                      <UserName>@{user.username}</UserName>
-                    </A>
-                  </Spacing>
-                </ListItem>
-              ))}
-            </List>
-          </Root>
-        );
-      }}
-    </Query>
+                <FullName>fix name</FullName>
+                <UserName>fix UserName</UserName>
+          </ListItem>
+      </List>
+    </Root>
   );
 };
 

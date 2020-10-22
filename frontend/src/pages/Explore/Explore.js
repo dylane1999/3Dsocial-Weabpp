@@ -73,66 +73,11 @@ const Explore = () => {
     <Root maxWidth="md">
       <Head title="Explore New Posts and Users" />
 
-      <Query
-        query={GET_POSTS}
-        variables={variables}
-        notifyOnNetworkStatusChange
-      >
-        {({ data, loading, fetchMore, networkStatus }) => {
-          if (loading && networkStatus === 1) {
-            return (
+
               <PostsContainer>
                 <Skeleton height={300} count={EXPLORE_PAGE_POSTS_LIMIT} />
               </PostsContainer>
-            );
-          }
 
-          const { posts, count } = data.getPosts;
-
-          if (!posts.length > 0) return <Empty text="No posts yet." />;
-
-          return (
-            <InfiniteScroll
-              data={posts}
-              dataKey="getPosts.posts"
-              count={parseInt(count)}
-              variables={variables}
-              fetchMore={fetchMore}
-            >
-              {data => {
-                const showNextLoading =
-                  loading && networkStatus === 3 && count !== data.length;
-
-                return (
-                  <Fragment>
-                    <PostsContainer>
-                      {data.map(post => (
-                        <Fragment key={post.id}>
-                          <Modal
-                            open={modalPostId === post.id}
-                            onClose={closeModal}
-                          >
-                            <PostPopup id={post.id} closeModal={closeModal} />
-                          </Modal>
-
-                          <ExploreCard
-                            image={post.image}
-                            countLikes={post.likes.length}
-                            countComments={post.comments.length}
-                            openPostPopup={() => openModal(post.id)}
-                          />
-                        </Fragment>
-                      ))}
-                    </PostsContainer>
-
-                    {showNextLoading && <Loading top="lg" />}
-                  </Fragment>
-                );
-              }}
-            </InfiniteScroll>
-          );
-        }}
-      </Query>
     </Root>
   );
 };
