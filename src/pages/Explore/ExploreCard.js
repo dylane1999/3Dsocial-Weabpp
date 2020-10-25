@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Spacing } from "components/Layout";
-import { LikeIcon, PostCommentIcon } from "components/icons";
+import { LikeIcon } from "components/icons";
 
 const Overlay = styled.div`
   position: absolute;
@@ -73,12 +73,6 @@ const LikeIconWrapper = styled.div`
   align-items: flex-end;
 `;
 
-const CommentIconWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-end;
-`;
 
 const Title = styled.div`
   color: white;
@@ -102,7 +96,7 @@ const PostInfo = styled.div`
 /**
  * Card component, meant to be used in Explore page
  */
-const ExploreCard = ({ openPostPopup, image, countLikes, countComments }) => {
+const ExploreCard = ({ openPostPopup, image, countLikes }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
@@ -140,10 +134,6 @@ const ExploreCard = ({ openPostPopup, image, countLikes, countComments }) => {
                 {countLikes}
               </Spacing>
             </LikeIconWrapper>
-            <CommentIconWrapper>
-              <PostCommentIcon color="white" />
-              <Spacing left="xs">{countComments}</Spacing>
-            </CommentIconWrapper>
           </Icons>
 
         </BottomWrapper>
@@ -156,7 +146,6 @@ ExploreCard.propTypes = {
   openPostPopup: PropTypes.func.isRequired,
   image: PropTypes.string.isRequired,
   countLikes: PropTypes.number.isRequired,
-  countComments: PropTypes.number.isRequired,
 };
 
 export default ExploreCard;

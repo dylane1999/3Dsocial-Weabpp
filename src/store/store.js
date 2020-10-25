@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import { messageReducer, messageInitialState } from './message';
 import { authReducer, authInitialState } from './auth';
 
 /**
@@ -11,7 +10,6 @@ const StoreContext = createContext();
  * Combine initial states
  */
 const store = {
-  message: messageInitialState,
   auth: authInitialState,
 };
 
@@ -19,7 +17,6 @@ const store = {
  * Combine reducers
  */
 const reducers = (store, action) => ({
-  message: messageReducer(store.message, action),
   auth: authReducer(store.auth, action),
 });
 

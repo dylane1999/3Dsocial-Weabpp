@@ -9,7 +9,6 @@ import { Spacing } from 'components/Layout';
 import { Error } from 'components/Text';
 import { InputText, Button } from 'components/Form';
 
-import { SIGN_IN } from 'graphql/user';
 
 import * as Routes from 'routes';
 
@@ -43,51 +42,16 @@ const SignIn = ({ history, location }) => {
   const [values, setValues] = useState({ emailOrUsername: '', password: '' });
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    setError('');
-  }, [location.pathname]);
-
-  const handleChange = e => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  };
 
 
-  const renderErrors = apiError => {
-    let errorMessage;
-
-    if (error) {
-      errorMessage = error;
-    } else if (apiError) {
-      errorMessage = apiError.graphQLErrors[0].message;
-    }
-
-    if (errorMessage) {
-      return (
-        <ErrorMessage>
-          <Error size="xxs" color="white">
-            {errorMessage}
-          </Error>
-        </ErrorMessage>
-      );
-    }
-
-    return null;
-  };
 
   const { emailOrUsername, password } = values;
 
   return (
-    <Mutation
-      mutation={SIGN_IN}
-      variables={{ input: { emailOrUsername, password } }}
-    >
-      {(signin, { loading, error: apiError }) => (
+
         <form >
           <Root>
             <InputContainer>
-              {renderErrors(apiError)}
-
               <InputText
                 autoFocus
                 type="text"
@@ -108,16 +72,12 @@ const SignIn = ({ history, location }) => {
                 placeholder="Password"
                 borderColor="white"
               />
-              <A to={Routes.FORGOT_PASSWORD}>
-                <ForgotPassword>Forgot password?</ForgotPassword>
-              </A>
+
             </InputContainer>
 
-            <Button disabled={loading}>Log in</Button>
+            <Button>Log in</Button>
           </Root>
         </form>
-      )}
-    </Mutation>
   );
 };
 

@@ -16,11 +16,18 @@ const CreatePostTest = () => {
     setFocus(!isFocused);
   };
 
+  const displayPostForm = () => {
+    if (isFocused) {
+      return <CreateFocused buttonClick={handleFocus} />;
+    }
+  };
+
   return (
-    <Root >
-      {isFocused ? <CreateFocused buttonClick={handleFocus} /> : <CreateUnfocused buttonClick={handleFocus}  />}
+    <Root>
+      {displayPostForm()}
+      <CreateUnfocused buttonClick={handleFocus} />
     </Root>
   );
-};   
+};
 
 export default CreatePostTest;

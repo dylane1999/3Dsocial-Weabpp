@@ -42,6 +42,7 @@ export const createUserDoc = async (user, userName, fullName) => {
         photoURL: defaultPic,
         createdAt,
         userName: userName,
+        fullName: fullName
       });
     } catch (error) {
       console.log(error);

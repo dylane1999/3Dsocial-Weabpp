@@ -10,12 +10,9 @@ import SideBar from "../App/SideBar";
 import UserSuggestions from "../App/UserSuggestions";
 
 import Home from "pages/Home";
-import Profile from "pages/Profile";
 import Explore from "pages/Explore";
 import People from "pages/People";
-import Notifications from "pages/Notifications";
-import Post from "pages/Post";
-import Messages from "pages/Messages";
+
 
 import { useWindowSize } from "hooks/useWindowSize";
 import { useClickOutside } from "hooks/useClickOutside";
@@ -196,18 +193,6 @@ const AppLayout = ({ location, authUser }) => {
               <Route exact path={Routes.EXPLORE} component={Explore} />
 
               <Route exact path={Routes.PEOPLE} component={People} />
-
-              <Route
-                exact
-                path={Routes.NOTIFICATIONS}
-                component={Notifications}
-              />
-
-              <Route exact path={Routes.MESSAGES} component={Messages} />
-
-              <Route exact path={Routes.USER_PROFILE} component={Profile} />
-
-              <Route exact path={Routes.POST} component={Post} />
 
               <Route component={NotFound} />
             </Switch>

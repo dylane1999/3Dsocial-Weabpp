@@ -9,7 +9,6 @@ import InfiniteScroll from 'components/InfiniteScroll';
 import Head from 'components/Head';
 import PeopleCard from './PeopleCard';
 
-import { GET_USERS } from 'graphql/user';
 
 import { PEOPLE_PAGE_USERS_LIMIT } from 'constants/DataLimit';
 

@@ -4,7 +4,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import styled from "styled-components";
 
 
-import { AuthHeader, SignUp, ForgotPassword, ResetPassword } from "pages/Auth";
+import { AuthHeader, SignUp } from "pages/Auth";
 
 import * as Routes from "routes";
 
@@ -108,16 +108,6 @@ const AuthLayout = () => {
                 exact
                 path={Routes.HOME}
                 render={() => <SignUp />}
-              />
-              <Route
-                exact
-                path={Routes.FORGOT_PASSWORD}
-                component={ForgotPassword}
-              />
-              <Route
-                exact
-                path={Routes.RESET_PASSWORD}
-                render={() => <ResetPassword />}
               />
               <Redirect to={Routes.HOME} />
             </Switch>

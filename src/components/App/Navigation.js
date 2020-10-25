@@ -21,17 +21,7 @@ const Link = styled(NavLink)`
 
   &:hover,
   &.selected {
-    color: ${p => p.theme.colors.primary.main};
-    background-color: ${p => p.theme.colors.grey[100]};
-
-    svg path {
-      fill: ${p => p.theme.colors.primary.main};
-    }
-
-    @media (min-width: ${p => p.theme.screen.md}) {
-      background-color: ${p => p.theme.colors.white};
-      
-    }
+    border-right: 2px solid white;
   }
 `;
 
@@ -84,24 +74,6 @@ const Navigation = () => {
         <ListItem>
           <PeopleIcon />
           <Name>People</Name>
-        </ListItem>
-      </Link>
-
-      <Link exact activeClassName="selected" to={Routes.NOTIFICATIONS}>
-        <ListItem>
-          <NotificationIcon width={18} />
-          <Name>Notifications</Name>
-        </ListItem>
-      </Link>
-
-      <Link
-        exact
-        activeClassName="selected"
-        to={generatePath(Routes.MESSAGES, { userId: Routes.NEW_ID_VALUE })}
-      >
-        <ListItem>
-          <EnvelopeIcon />
-          <Name>Messages</Name>
         </ListItem>
       </Link>
     </List>

@@ -1,19 +1,13 @@
 import React, { useState, Fragment } from 'react';
 import styled from 'styled-components';
 import { generatePath } from 'react-router-dom';
-import { Query } from 'react-apollo';
 
 import { Container } from 'components/Layout';
-import ExploreCard from './ExploreCard';
 import Skeleton from 'components/Skeleton';
-import PostPopup from 'components/PostPopup';
-import Modal from 'components/Modal';
-import InfiniteScroll from 'components/InfiniteScroll';
-import Empty from 'components/Empty';
-import { Loading } from 'components/Loading';
+
 import Head from 'components/Head';
 
-import { GET_POSTS } from 'graphql/post';
+
 
 import { EXPLORE_PAGE_POSTS_LIMIT } from 'constants/DataLimit';
 

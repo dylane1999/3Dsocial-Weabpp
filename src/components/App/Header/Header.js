@@ -1,25 +1,25 @@
-import React, { useState, useEffect, useRef } from "react";
-import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
-import { withRouter } from "react-router-dom";
-
-import { NotificationIcon, MenuIcon, EnvelopeOpenIcon } from "components/icons";
-import { Container, Spacing } from "components/Layout";
-import { A } from "components/Text";
 import Avatar from "components/Avatar";
+import { MenuIcon } from "components/icons";
 import Search from "components/Search";
-import HeaderDropDowns from "./HeaderDropDowns";
-
-import { useClickOutside } from "hooks/useClickOutside";
-
-import { useStore } from "store";
-
+import { A } from "components/Text";
 import { HEADER_HEIGHT } from "constants/Layout";
-import SiteInfo from "constants/SiteInfo.json";
+import { useClickOutside } from "hooks/useClickOutside";
+import PropTypes from "prop-types";
+import React, { useRef, useState } from "react";
+import { withRouter } from "react-router-dom";
+import styled from "styled-components";
+import defaultPic from "../../../img/default-pic.png";
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
+import "firebase/storage";
 
-import * as Routes from "routes";
 
-import defaultPic from "../../../img/default-pic.png"
+
+
+
+
+
 
 
 const NavWrapper = styled.div`
@@ -114,12 +114,11 @@ const UserName = styled.div`
  * Header of the App when user is authenticated
  */
 const Header = ({ location, toggleSideBar }) => {
-  const [{ auth }] = useStore();
+  const user = firebase.auth().currentUser;
 
   const [dropdownOpen, setDropdownOpen] = useState(null);
   const [dropdownData, setDropdownData] = useState([]);
 
-  const messageRef = useRef(null);
   const notificationRef = useRef(null);
   const userRef = useRef(null);
 
@@ -129,7 +128,6 @@ const Header = ({ location, toggleSideBar }) => {
     }
   };
 
-  useClickOutside(messageRef, closeOnClickOutside);
   useClickOutside(notificationRef, closeOnClickOutside);
   useClickOutside(userRef, closeOnClickOutside);
 
@@ -138,23 +136,8 @@ const Header = ({ location, toggleSideBar }) => {
     setDropdownData([]);
   };
 
-  useEffect(() => {
-    return () => closeDropDown();
-  }, [location.pathname]);
 
-  const handleIconClick = (dropdownType) => {
-    if (dropdownOpen) {
-      closeDropDown();
-    } else {
-      if (dropdownType === "NOTIFICATION") {
-        setDropdownData(auth.user.newNotifications);
-      } else if (dropdownType === "MESSAGE") {
-        setDropdownData(auth.user.newConversations);
-      }
 
-      setDropdownOpen(dropdownType);
-    }
-  };
 
   return (
     <>
@@ -169,19 +152,11 @@ const Header = ({ location, toggleSideBar }) => {
         <RightSection>
           <UserContainer>
             <UserName>
-              <p>username change</p>
+      <p>{user.email}</p>
             </UserName>
-            <Button ghost onClick={() => handleIconClick("USER")}>
+            <Button>
               <Avatar image={defaultPic} size={40} />
             </Button>
-            <HeaderDropDowns
-              messageRef={messageRef}
-              notificationRef={notificationRef}
-              userRef={userRef}
-              dropdownOpen={dropdownOpen}
-              dropdownData={dropdownData}
-              closeDropDown={closeDropDown}
-            />
           </UserContainer>
           <Hamburger onClick={toggleSideBar}>
             <MenuIcon />

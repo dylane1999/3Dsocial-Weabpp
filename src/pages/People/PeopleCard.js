@@ -5,7 +5,6 @@ import { generatePath } from 'react-router-dom';
 
 import { A } from 'components/Text';
 import { Spacing } from 'components/Layout';
-import Follow from 'components/Follow';
 import theme from 'theme';
 
 import * as Routes from 'routes';
@@ -111,7 +110,6 @@ const PeopleCard = ({ user }) => {
 
       <Spacing top="lg" />
 
-      <Follow user={user} />
     </Root>
   );
 };
