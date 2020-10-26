@@ -9,6 +9,11 @@ const InfoWrapper = styled.div`
   height: 100%;
   width: 100%;
 
+  
+  @media (max-width: 1000px) {
+    display: none;
+  }
+
 `;
 
 const PostDescription = styled.div`

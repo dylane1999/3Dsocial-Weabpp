@@ -2,6 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import Avatar from "./Avatar";
 
+const CommentSpacing = styled.div`
+  padding-bottom: 10px;
+  width: 100%;
+  height: 100%;
+`;
 const Root = styled.div`
   display: flex;
   flex-direction: row;
@@ -44,6 +49,7 @@ const UserInfoWrapper = styled.div`
 
 const Comment = (props) => {
   return (
+    <CommentSpacing>
     <Root>
       <AvatarWrapper>
         <Avatar size={50} />
@@ -53,6 +59,7 @@ const Comment = (props) => {
         <CommentContents>{props.commentContents}</CommentContents>
       </UserInfoWrapper>
     </Root>
+    </CommentSpacing>
   );
 };
 

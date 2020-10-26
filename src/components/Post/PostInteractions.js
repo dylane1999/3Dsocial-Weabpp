@@ -35,7 +35,7 @@ const Number = styled.div`
 const PostInteractions = (props) => {
   const [liked, setLiked] = useState(false);
   const [numLikes, setNumLikes] = useState(0);
-  const [numComments, setNumComments] = useState(0);
+  const [numComments, setNumComments] = useState(5);
 
   const handleDisplayIcon = () => {
     if (liked) {
@@ -65,6 +65,7 @@ const PostInteractions = (props) => {
     <InteractionWrapper>
       <LikeWrapper onClick={handleLike}><Number>{numLikes}</Number> {handleDisplayIcon()}</LikeWrapper>
       <CommentWrapper onClick={handleShowComments}>
+        <Number>{numComments}</Number>
         <CommentIcon />
       </CommentWrapper>
     </InteractionWrapper>

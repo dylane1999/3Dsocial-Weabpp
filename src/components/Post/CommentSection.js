@@ -53,17 +53,15 @@ const CommentsWrapper = styled.div`
   justify-self: flex-start;
   align-items: flex-start;
   align-self: flex-start;
-  margin-top: 15px;
+  padding-top: 25px;
   padding: 10px;
   height: 300px;
   width: 100%
   overflow-y: auto;
+  margin-top: 10px;
 
-`;
-const CommentSpacing = styled.div`
-  padding-bottom: 10px;
-  width: 100%;
-  height: 100%;
+
+
 `;
 
 const CommentSection = () => {
@@ -74,37 +72,27 @@ const CommentSection = () => {
         <CommentButton>Submit</CommentButton>
       </CommentInputWrapper>
       <CommentsWrapper>
-        <CommentSpacing>
-          <Comment
-            username={"david spade"}
-            commentContents={"wow sick design"}
-          />
-        </CommentSpacing>
-        <CommentSpacing>
-          <Comment
-            username={"carl anthony"}
-            commentContents={"this is kinda cool"}
-          />
-        </CommentSpacing>
-        <CommentSpacing>
-          <Comment username={"suzie weathers"} commentContents={"yieks"} />
-        </CommentSpacing>
-
-        <CommentSpacing>
-          <Comment
-            username={"linda hosain"}
-            commentContents={"i dont like drones"}
-          />
-        </CommentSpacing>
-        <CommentSpacing>
-          <Comment
-            username={"cindy poong"}
-            commentContents={"i do like drones"}
-          />
-        </CommentSpacing>
+        <Comment username={"david spade"} commentContents={"wow sick design"} />
+        <Comment
+          username={"carl anthony"}
+          commentContents={"this is kinda cool"}
+        />
+        <Comment username={"suzie weathers"} commentContents={"yieks"} />
+        <Comment
+          username={"linda hosain"}
+          commentContents={"i dont like drones"}
+        />
+        <Comment
+          username={"cindy poong"}
+          commentContents={"i do like drones"}
+        />
       </CommentsWrapper>
     </Root>
   );
 };
 
 export default CommentSection;
+
+{
+  //comments above will be queried in the future 
+}

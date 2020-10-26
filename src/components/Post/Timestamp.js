@@ -11,6 +11,12 @@ const Wrapper = styled.div`
   color: #ffffff;
   font-weight: 300;
   font-size: 16px;
+  
+  @media (max-width: 1000px) {
+    display: none;
+  }
+
+  
 `;
 const TimeWrapper = styled.div`
   display: flex;
