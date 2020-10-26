@@ -25,19 +25,28 @@ const Root = styled(Container)`
 `;
 
 const PeopleContainer = styled.div`
-display: grid;
-grid-template-columns: auto auto auto;
-grid-template-rows: auto;
-grid-gap: 20px;
-margin-bottom: ${(p) => p.theme.spacing.lg};
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 20px;
+  margin-bottom: ${(p) => p.theme.spacing.lg};
 
-
-  @media(max-width: 1600px){
-    grid-template-columns: repeat(4, 3fr);
+  @media (max-width: 1520px) {
+    grid-template-columns: repeat(2, 3fr);
   }
 
-  @media(max-width: 1500px){
-    grid-template-columns: repeat(3, 3fr);
+  @media (max-width: 1170px) {
+    grid-template-columns: repeat(1, 3fr);
+  }
+
+
+  @media (max-width: 991px) {
+    grid-template-columns: repeat(2, 3fr);
+  }
+
+
+  @media (max-width: 702px) {
+    grid-template-columns: repeat(1, 3fr);
   }
 `;
 
@@ -61,16 +70,15 @@ const People = () => {
   return (
     <Root maxWidth="md">
       <PeopleContainer>
-        <Person/>
-        <Person/>
-        <Person/>
-        <Person/>
-        <Person/>
-        <Person/>
-        <Person/>
-        <Person/>
-        <Person/>
-
+        <PeopleCard />
+        <PeopleCard />
+        <PeopleCard />
+        <PeopleCard />
+        <PeopleCard />
+        <PeopleCard />
+        <PeopleCard />
+        <PeopleCard />
+        <PeopleCard />
       </PeopleContainer>
     </Root>
   );
