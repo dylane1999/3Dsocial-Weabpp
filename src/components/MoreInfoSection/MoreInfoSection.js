@@ -15,12 +15,7 @@ const Root = styled.div`
 
 
   @media (max-width: 1100px) {
-    padding-top: 75px;
-    height: 100%;
-    width: 100%;
-    background-color: #149bde;
-    overflow-x:hidden;
-
+    display:none;
     }
 `;
 
@@ -45,3 +40,16 @@ export const MoreInfoSection = () => {
 };
 
 export default MoreInfoSection;
+
+{
+  // @media (max-width: 1100px) {
+  //  padding-top: 75px;
+  //  height: 100%;
+  //  width: 100%;
+  //  background-color: #149bde;
+   // overflow-x:hidden;
+
+   //previous media query for root
+
+    }
+
