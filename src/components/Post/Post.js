@@ -14,9 +14,10 @@ const Root = styled.div`
   flex-direction: column;
   justify-content: center;
   align-itmes:center;
+  padding-bottom: 35px;
+
 
 `;
-
 const PostContainer = styled.div`
   display: flex;
   flex-direction: column;

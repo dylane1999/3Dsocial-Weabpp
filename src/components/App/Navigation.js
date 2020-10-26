@@ -9,7 +9,6 @@ import {
   NotificationIcon,
   HomeIcon,
   PeopleIcon,
-  EnvelopeIcon,
 } from 'components/icons';
 
 const Link = styled(NavLink)`

@@ -9,11 +9,9 @@ const InfoWrapper = styled.div`
   height: 100%;
   width: 100%;
 
-  
   @media (max-width: 1000px) {
     display: none;
   }
-
 `;
 
 const PostDescription = styled.div`
@@ -23,6 +21,10 @@ const PostDescription = styled.div`
   font-family: Proxima Nova;
   width: 45%;
   height: 100%;
+
+  @media (max-width: 1500px) {
+    display: none;
+  }
 `;
 
 const PostTitle = styled.div`
@@ -30,9 +32,12 @@ const PostTitle = styled.div`
   font-weight: 500;
   font-size: 25.888px;
   color: #ffffff;
-  height: 100%;
   padding-top: 15px;
+  text-align: center
 
+  @media (max-width: 1300px) {
+    padding-top: 0px;
+  }
 `;
 
 const PostInfo = (props) => {

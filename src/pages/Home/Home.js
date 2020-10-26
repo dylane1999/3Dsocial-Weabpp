@@ -59,29 +59,38 @@ const Container = styled.div`
  * Home page of the app
  */
 const Home = () => {
-  const [{ auth }] = useStore();
-  const [modalPostId, setModalPostId] = useState(null);
-
-  const closeModal = () => {
-    window.history.pushState("", "", "/");
-    setModalPostId(null);
-  };
-
-  const openModal = (postId) => {
-    window.history.pushState("", "", generatePath(Routes.POST, { id: postId }));
-    setModalPostId(postId);
-  };
-
-  const variables = {
-    //   userId: auth.user.id,
-    skip: 0,
-    limit: HOME_PAGE_POSTS_LIMIT,
-  };
 
   return (
     <Container maxWidth="sm">
       <Spacing />
       <Post
+        backgroundImage={Drone}
+        postUser={"charlie wilson"}
+        postTitle={"Printable Drone"}
+        postDescription={
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pretium a velit at vitae potenti consequat. Nec leo, gravida viverra augue ut tincidunt rutrum odio diam."
+        }
+        timestamp={12}
+      />
+            <Post
+        backgroundImage={Drone}
+        postUser={"charlie wilson"}
+        postTitle={"Printable Drone"}
+        postDescription={
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pretium a velit at vitae potenti consequat. Nec leo, gravida viverra augue ut tincidunt rutrum odio diam."
+        }
+        timestamp={12}
+      />
+            <Post
+        backgroundImage={Drone}
+        postUser={"charlie wilson"}
+        postTitle={"Printable Drone"}
+        postDescription={
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pretium a velit at vitae potenti consequat. Nec leo, gravida viverra augue ut tincidunt rutrum odio diam."
+        }
+        timestamp={12}
+      />
+            <Post
         backgroundImage={Drone}
         postUser={"charlie wilson"}
         postTitle={"Printable Drone"}
