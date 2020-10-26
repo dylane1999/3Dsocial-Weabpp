@@ -1,4 +1,4 @@
-# React Frontend for 3Dvation
+# React Frontend for 3D print sharing Social Network
 
 To start the frontend
 
