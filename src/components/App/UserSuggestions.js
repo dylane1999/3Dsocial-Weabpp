@@ -22,10 +22,16 @@ const Root = styled.div`
   padding: ${(p) => p.theme.spacing.sm};
   border-radius: ${(p) => p.theme.radius.sm};
 
-  @media (min-width: ${(p) => p.theme.screen.md}) {
-    display: block;
-  }
+
 `;
+
+{
+//@media (min-width: ${(p) => p.theme.screen.md}) {
+ // display: block;
+
+ //code to display user suggestions ^^^^
+}
+
 
 const List = styled.ul`
   padding: 0;
@@ -75,8 +81,8 @@ const UserSuggestions = ({ pathname }) => {
           <ListItem >
               <Avatar  size={50} />
 
-                <FullName>fix name</FullName>
-                <UserName>fix UserName</UserName>
+                <FullName>name</FullName>
+                <UserName>UserName</UserName>
           </ListItem>
       </List>
     </Root>

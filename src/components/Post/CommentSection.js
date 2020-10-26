@@ -28,7 +28,7 @@ const CommentInputWrapper = styled.div`
   width: 100%;
   background: rgba(128, 128, 128, 0.78);
   border-radius: 84px;
-  height: 55px;
+  height: 60px;
   padding: 15px;
 `;
 

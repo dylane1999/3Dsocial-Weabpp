@@ -13,7 +13,7 @@ import { PEOPLE_PAGE_USERS_LIMIT } from "constants/DataLimit";
 
 import { useStore } from "store";
 
-import { Query } from "react-apollo";
+ 
 
 const Root = styled(Container)`
   margin-top: ${(p) => p.theme.spacing.lg};
@@ -25,19 +25,26 @@ const Root = styled(Container)`
 `;
 
 const PeopleContainer = styled.div`
-display: grid;
-grid-template-columns: auto auto auto;
-grid-template-rows: auto;
-grid-gap: 20px;
-margin-bottom: ${(p) => p.theme.spacing.lg};
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 20px;
+  margin-bottom: ${(p) => p.theme.spacing.lg};
 
-
-  @media(max-width: 1600px){
-    grid-template-columns: repeat(4, 3fr);
+  @media (max-width: 1520px) {
+    grid-template-columns: repeat(2, 3fr);
   }
 
-  @media(max-width: 1500px){
-    grid-template-columns: repeat(3, 3fr);
+  @media (max-width: 1170px) {
+    grid-template-columns: repeat(1, 3fr);
+  }
+
+  @media (max-width: 991px) {
+    grid-template-columns: repeat(2, 3fr);
+  }
+
+  @media (max-width: 702px) {
+    grid-template-columns: repeat(1, 3fr);
   }
 `;
 
@@ -61,16 +68,54 @@ const People = () => {
   return (
     <Root maxWidth="md">
       <PeopleContainer>
-        <Person/>
-        <Person/>
-        <Person/>
-        <Person/>
-        <Person/>
-        <Person/>
-        <Person/>
-        <Person/>
-        <Person/>
-
+        <PeopleCard
+          username={"username"}
+          bio={
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa augue viverra id laoreet enim in placerat. Eu tellus, purus elementum ac."
+          }
+        />
+        <PeopleCard
+          username={"username"}
+          bio={
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa augue viverra id laoreet enim in placerat. Eu tellus, purus elementum ac."
+          }
+        />
+        <PeopleCard
+          username={"username"}
+          bio={
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa augue viverra id laoreet enim in placerat. Eu tellus, purus elementum ac."
+          }
+        />
+        <PeopleCard
+          username={"username"}
+          bio={
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa augue viverra id laoreet enim in placerat. Eu tellus, purus elementum ac."
+          }
+        />
+        <PeopleCard
+          username={"username"}
+          bio={
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa augue viverra id laoreet enim in placerat. Eu tellus, purus elementum ac."
+          }
+        />
+        <PeopleCard
+          username={"username"}
+          bio={
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa augue viverra id laoreet enim in placerat. Eu tellus, purus elementum ac."
+          }
+        />
+        <PeopleCard
+          username={"username"}
+          bio={
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa augue viverra id laoreet enim in placerat. Eu tellus, purus elementum ac."
+          }
+        />
+        <PeopleCard
+          username={"username"}
+          bio={
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa augue viverra id laoreet enim in placerat. Eu tellus, purus elementum ac."
+          }
+        />
       </PeopleContainer>
     </Root>
   );

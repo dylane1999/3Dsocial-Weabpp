@@ -33,15 +33,18 @@ import styles from "./ServiceStyle.module.css";
 //className={styles.container}>
 
 const Root = styled.div`
+  position: absolute;
   width: 100%;
-  background-color: #1ca7ec;
+  background: inherit;
   /*background-image: url(${HomeBackground});*/
-  background-position: center;
-  background-repeat: no-repeat;
   color: white;
   padding-bottom: 100px;
-  background-position: top;
-  background-size: 100%;
+  z-index: 1;
+  
+
+  
+
+
 `;
 
 const NavBar = styled.div`
@@ -99,6 +102,27 @@ const HeroModelName = styled.p`
   font-size: 30.888px;
   line-height: 33px;
   color: #ffffff;
+`;
+
+const BackgroundElement = styled.div`
+  width: 100%;
+  position: relative;
+  background-color: #1ca7ec;
+  background-image: url(${HomeBackground});
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  background-position: top;
+  background-size: 100%;
+  z-index: 3;
+  height: 1100px;
+  background-color: #1ca7ec;
+`;
+
+const BackgroundColor = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: #1ca7ec;
 `;
 
 /**
@@ -177,6 +201,7 @@ const AppLayout = ({ location, authUser }) => {
           </HeroContent>
         </HeroImage>{" "}
       </Hero>
+      <BackgroundElement>
       <Root>
         <Box
           flexDirection="row"
@@ -209,6 +234,7 @@ const AppLayout = ({ location, authUser }) => {
           </Box>
         </Box>
       </Root>
+      </BackgroundElement>
     </>
   );
 };
