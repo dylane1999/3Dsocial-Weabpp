@@ -184,8 +184,6 @@ const SignUp = () => {
       return (
         <MobileStyledCard
           image={PrinterIcon}
-          title={"Lorem Ipsum"}
-          subtitle={"lorem ipsum iore"}
           mediaBg={"transparent"}
         ></MobileStyledCard>
       );

@@ -13,6 +13,11 @@ const Root = styled.div`
   border-radius: 10px;
   padding: 25px;
   color: #ffffff;
+
+  @media (max-width: 1000px) {
+    width: 85vw;
+  }
+  
 `;
 
 const CommentInputWrapper = styled.div`

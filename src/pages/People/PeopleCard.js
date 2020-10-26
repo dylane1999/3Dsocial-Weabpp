@@ -22,100 +22,15 @@ const Root = styled.div`
   transition: border-color 0.1s;
 `;
 
-const ImageContainer = styled.div`
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  overflow: hidden;
-  flex-shrink: 0;
-`;
 
-const Image = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
-const InitialLetters = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  text-transform: uppercase;
-  color: ${p => p.theme.colors.white};
-  font-size: ${p => p.theme.font.size.lg};
-  background-color: ${p => p.color};
-`;
-
-const FullName = styled.span`
-  max-width: 200px;
-  font-weight: ${p => p.theme.font.weight.bold};
-`;
-
-const UserName = styled.span`
-  font-size: ${p => p.theme.font.size.xs};
-`;
-
-/**
- * Card component for rendering user info, meant to be used in Peoples page
- */
-const PeopleCard = ({ user }) => {
-  const [color, setColor] = useState('');
-
-  const { fullName, username, image } = user;
-
-  useEffect(() => {
-    const { primary, secondary, success, error } = theme.colors;
-    const colors = [primary.main, secondary.main, success, error.main];
-    const randomColor = Math.floor(Math.random() * colors.length);
-    setColor(colors[randomColor]);
-  }, []);
-
-  const splitFullName = () => {
-    // If a fullName contains more word than two, take first two word
-    const splitWords = fullName
-      .split(' ')
-      .slice(0, 2)
-      .join(' ');
-
-    // Take only first letters from split words
-    const firstLetters = splitWords
-      .split(' ')
-      .map(a => a.charAt(0))
-      .join(' ');
-
-    return firstLetters;
-  };
-
+const PeopleCard = () => {
   return (
-    <Root>
-      <A to={generatePath(Routes.USER_PROFILE, { username })}>
-        <ImageContainer>
-          {image ? (
-            <Image src={image} />
-          ) : (
-            <InitialLetters color={color}>{splitFullName()}</InitialLetters>
-          )}
-        </ImageContainer>
-      </A>
+    <div>
+      
+    </div>
+  )
+}
 
-      <Spacing top="sm" bottom="xs">
-        <A to={generatePath(Routes.USER_PROFILE, { username })}>
-          <FullName>{fullName}</FullName>
-        </A>
-      </Spacing>
 
-      <UserName>@{username}</UserName>
-
-      <Spacing top="lg" />
-
-    </Root>
-  );
-};
-
-PeopleCard.propTypes = {
-  user: PropTypes.object.isRequired,
-};
 
 export default PeopleCard;

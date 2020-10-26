@@ -13,12 +13,15 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-itmes:center;
+
 `;
 
 const PostContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-itmes:center;
   width: 50vw;
   height: 375px;
   -webkit-background-size: cover;
@@ -28,7 +31,12 @@ const PostContainer = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 10px;
-`;
+
+  @media (max-width: 1000px) {
+    width: 85vw;
+  }
+  
+  `;
 
 const UpperSection = styled.div`
   display: flex;

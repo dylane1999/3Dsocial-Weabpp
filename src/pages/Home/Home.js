@@ -12,7 +12,6 @@ import Head from "components/Head";
 import { useStore } from "store";
 
 import { HOME_PAGE_POSTS_LIMIT } from "constants/DataLimit";
-import { Container } from "components/Layout";
 
 import * as Routes from "routes";
 
@@ -37,6 +36,25 @@ const Spacing = styled.div`
   padding: 15px;
 `;
 
+const Container = styled.div`
+  position: relative;
+  margin: 0 auto;
+  margin-top: ${(p) => (p.marginTop ? p.theme.spacing[p.marginTop] : 0)};
+  width: 100%;
+  max-width: ${(p) => p.maxWidth && p.theme.screen[p.maxWidth]};
+  padding: ${(p) =>
+    p.padding ? `0 ${p.theme.spacing[p.padding]}` : `0 ${p.theme.spacing.sm}`};
+  z-index: ${(p) => p.zIndex && p.theme.zIndex[p.zIndex]};
+  background-color: inherit;
+  border-radius: ${(p) => p.radius && p.theme.radius[p.radius]};
+  
+  @media (max-width: 1000px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+`;
 /**
  * Home page of the app
  */
@@ -67,7 +85,9 @@ const Home = () => {
         backgroundImage={Drone}
         postUser={"charlie wilson"}
         postTitle={"Printable Drone"}
-        postDescription={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pretium a velit at vitae potenti consequat. Nec leo, gravida viverra augue ut tincidunt rutrum odio diam."}
+        postDescription={
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pretium a velit at vitae potenti consequat. Nec leo, gravida viverra augue ut tincidunt rutrum odio diam."
+        }
         timestamp={12}
       />
     </Container>

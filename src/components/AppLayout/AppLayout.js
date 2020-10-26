@@ -13,7 +13,6 @@ import Home from "pages/Home";
 import Explore from "pages/Explore";
 import People from "pages/People";
 
-
 import { useWindowSize } from "hooks/useWindowSize";
 import { useClickOutside } from "hooks/useClickOutside";
 
@@ -28,7 +27,7 @@ import Box from "@material-ui/core/Box";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import DesignOfWeek from "../../img/DesignOfWeek.png";
 import HeroModelCreator from "./HeroModelCreator";
-import HomeBackground from "../../img/HomeBackground.svg"
+import HomeBackground from "../../img/HomeBackground.svg";
 
 import styles from "./ServiceStyle.module.css";
 //className={styles.container}>
@@ -59,6 +58,10 @@ const Hero = styled.div`
   width: 100%;
   height: 200px;
   background-color: #1ca7ec;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `;
 
 const HeroImage = styled.div`
@@ -67,7 +70,12 @@ const HeroImage = styled.div`
   align-items: center;
   width: 100%;
   height: 200px;
-  background: linear-gradient(30.67deg, #003959 4.59%, rgba(255, 255, 255, 0) 103.19%), url(${DesignOfWeek});
+  background: linear-gradient(
+      30.67deg,
+      #003959 4.59%,
+      rgba(255, 255, 255, 0) 103.19%
+    ),
+    url(${DesignOfWeek});
   border-radius: 0px 0px 18px 0px;
   border-bottom: none;
   background-repeat: no-repeat;
@@ -92,7 +100,6 @@ const HeroModelName = styled.p`
   line-height: 33px;
   color: #ffffff;
 `;
-
 
 /**
  * Main layout of the app, when user is authenticated
@@ -131,7 +138,7 @@ const AppLayout = ({ location, authUser }) => {
     };
   }, [location.pathname, isDesktop]);
 
- // if (!auth.user) return null;
+  // if (!auth.user) return null;
 
   const GetSidebarMarginSize = () => {
     if (screenLarge) {
@@ -163,7 +170,10 @@ const AppLayout = ({ location, authUser }) => {
         <HeroImage>
           <HeroContent>
             <HeroModelName>Model of the week</HeroModelName>
-            <HeroModelCreator  AuthorName={"John Smith"} PostType={"Product Packaging"}></HeroModelCreator>
+            <HeroModelCreator
+              AuthorName={"John Smith"}
+              PostType={"Product Packaging"}
+            ></HeroModelCreator>
           </HeroContent>
         </HeroImage>{" "}
       </Hero>
