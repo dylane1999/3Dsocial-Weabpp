@@ -1,78 +1,106 @@
-import React, { useState, Fragment } from 'react';
-import styled from 'styled-components';
-import { generatePath } from 'react-router-dom';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { generatePath } from "react-router-dom";
 
-import { Container } from 'components/Layout';
-import Skeleton from 'components/Skeleton';
+import { A } from "components/Text";
 
-import Head from 'components/Head';
+import { Loading } from "components/Loading";
+import InfiniteScroll from "components/InfiniteScroll";
+import Skeleton from "components/Skeleton";
+import Head from "components/Head";
 
+import { useStore } from "store";
 
+import { HOME_PAGE_POSTS_LIMIT } from "constants/DataLimit";
 
-import { EXPLORE_PAGE_POSTS_LIMIT } from 'constants/DataLimit';
+import * as Routes from "routes";
 
-import { useStore } from 'store';
+import Post from "../../components/Post/Post";
 
-import * as Routes from 'routes';
+import Drone from "../../img/Drone.png";
 
-const Root = styled(Container)`
-  margin-top: ${p => p.theme.spacing.lg};
-  margin-bottom: ${p => p.theme.spacing.sm};
-  width: 60vw;
-
-  @media (min-width: ${p => p.theme.screen.lg}) {
-    margin-left: ${p => p.theme.spacing.lg};
-    padding: 0;
-  }
+const Empty = styled.div`
+  padding: ${(p) => p.theme.spacing.sm};
+  border: 1px solid ${(p) => p.theme.colors.border.main};
+  border-radius: ${(p) => p.theme.radius.sm};
+  margin-top: ${(p) => p.theme.spacing.lg};
+  background-color: ${(p) => p.theme.colors.white};
 `;
 
-const PostsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(520px, 3fr));
-  grid-auto-rows: auto;
-  grid-gap: 20px;
+const StyledA = styled(A)`
+  text-decoration: underline;
+  font-weight: ${(p) => p.theme.font.weight.bold};
+`;
 
-  @media (min-width: ${p => p.theme.screen.lg}) {
-    margin-left: ${p => p.theme.spacing.lg};
-    padding: 0;
+const Spacing = styled.div`
+  padding: 15px;
+`;
+
+const Container = styled.div`
+  position: relative;
+  margin: 0 auto;
+  margin-top: ${(p) => (p.marginTop ? p.theme.spacing[p.marginTop] : 0)};
+  width: 100%;
+  max-width: ${(p) => p.maxWidth && p.theme.screen[p.maxWidth]};
+  padding: ${(p) =>
+    p.padding ? `0 ${p.theme.spacing[p.padding]}` : `0 ${p.theme.spacing.sm}`};
+  z-index: ${(p) => p.zIndex && p.theme.zIndex[p.zIndex]};
+  background-color: inherit;
+  border-radius: ${(p) => p.radius && p.theme.radius[p.radius]};
+  
+  @media (max-width: 1000px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
-
 `;
 
 /**
  * Explore page
  */
 const Explore = () => {
-  const [{ auth }] = useStore();
-
-  const [modalPostId, setModalPostId] = useState(null);
-
-  const closeModal = () => {
-    window.history.pushState('', '', '/explore');
-    setModalPostId(null);
-  };
-
-  const openModal = postId => {
-    window.history.pushState('', '', generatePath(Routes.POST, { id: postId }));
-    setModalPostId(postId);
-  };
-
-  const variables = {
-    authUserId: auth.user.id,
-    skip: 0,
-    limit: EXPLORE_PAGE_POSTS_LIMIT,
-  };
 
   return (
-    <Root maxWidth="md">
-      <Head title="Explore New Posts and Users" />
-
-
-              <PostsContainer>
-                <Skeleton height={300} count={EXPLORE_PAGE_POSTS_LIMIT} />
-              </PostsContainer>
-
-    </Root>
+    <Container maxWidth="sm">
+      <Spacing />
+      <Post
+        backgroundImage={Drone}
+        postUser={"charlie wilson"}
+        postTitle={"Printable Drone"}
+        postDescription={
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pretium a velit at vitae potenti consequat. Nec leo, gravida viverra augue ut tincidunt rutrum odio diam."
+        }
+        timestamp={12}
+      />
+            <Post
+        backgroundImage={Drone}
+        postUser={"charlie wilson"}
+        postTitle={"Printable Drone"}
+        postDescription={
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pretium a velit at vitae potenti consequat. Nec leo, gravida viverra augue ut tincidunt rutrum odio diam."
+        }
+        timestamp={12}
+      />
+            <Post
+        backgroundImage={Drone}
+        postUser={"charlie wilson"}
+        postTitle={"Printable Drone"}
+        postDescription={
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pretium a velit at vitae potenti consequat. Nec leo, gravida viverra augue ut tincidunt rutrum odio diam."
+        }
+        timestamp={12}
+      />
+            <Post
+        backgroundImage={Drone}
+        postUser={"charlie wilson"}
+        postTitle={"Printable Drone"}
+        postDescription={
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pretium a velit at vitae potenti consequat. Nec leo, gravida viverra augue ut tincidunt rutrum odio diam."
+        }
+        timestamp={12}
+      />
+    </Container>
   );
 };
 

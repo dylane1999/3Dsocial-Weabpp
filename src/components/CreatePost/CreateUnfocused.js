@@ -9,6 +9,7 @@ import PostIcon from "../../img/PostIcon.svg";
 const Root = styled.div`
   width: 100%;
   height: 100%;
+  color: white;
 `;
 const Button = styled.button`
   height: 40px;
@@ -16,7 +17,8 @@ const Button = styled.button`
   border-radius: 54px;
   border: none;
   margin-left: 20px;
-  background: #149bde;
+  background: #056696;
+  color: white;
 `;
 
 const Wrapper = styled.div`
