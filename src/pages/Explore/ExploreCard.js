@@ -97,20 +97,6 @@ const PostInfo = styled.div`
  * Card component, meant to be used in Explore page
  */
 const ExploreCard = ({ openPostPopup, image, countLikes }) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
-
-  useEffect(() => {
-    const img = new Image();
-    img.src = image;
-
-    img.onload = () => {
-      setImageLoaded(true);
-    };
-
-    return () => {
-      img.onload = null;
-    };
-  }, [image]);
 
   return (
     <Root>
