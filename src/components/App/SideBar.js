@@ -28,8 +28,8 @@ const Root = styled.div`
   transition: margin-left 0.2s ease-in-out;
   font-size: ${(p) => p.theme.font.size.xxs};
   z-index: ${(p) => p.theme.zIndex.sm};
-  background-color: ${(p) => p.theme.colors.white};
-  border-right: 1px solid ${(p) => p.theme.colors.border.main};
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(24px);
 
   @media (min-width: ${(p) => p.theme.screen.md}) {
     padding-top: 0;
@@ -76,6 +76,10 @@ const CreatePostWrapper = styled.div`
   display: flex;
   flex-direction: columnl
   justify-content: flex-end;
+
+  @media (max-width: 1007px) {
+    display: none;
+  }
 `;
 
 /**
@@ -92,22 +96,6 @@ const SideBar = ({ location, isOpen, sideBarRef }) => {
       <CreatePostWrapper>
         <CreatePostTest />
       </CreatePostWrapper>
-
-      {
-        // <User
-        //  exact
-        //   to={generatePath(Routes.USER_PROFILE, { username: auth.user.username })}
-        //    activeClassName="selected"
-        //  >
-        //  <Avatar image={auth.user.image} size={20} />
-        //   <Spacing left="xxs">
-        //    <FullName active={isAuthUsersProfilePage}>
-        //      {auth.user.fullName}
-        //     </FullName>
-        //   </Spacing>
-        // </User>
-      }
-
       <Navigation />
     </Root>
   );

@@ -15,6 +15,7 @@ const Root = styled.div`
   justify-content: center;
   align-itmes:center;
   padding-bottom: 35px;
+  overflow-x:hidden:
 
 
 `;

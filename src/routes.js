@@ -8,7 +8,7 @@ export const FORGOT_PASSWORD = '/forgot-password';
 
 export const RESET_PASSWORD = '/reset-password';
 
-export const USER_PROFILE = '/:username';
+export const USER_PROFILE = '/profile/:username';
 
 export const EXPLORE = '/explore';
 
@@ -16,6 +16,7 @@ export const PEOPLE = '/people';
 
 
 export const POST = '/post/:id';
+
 
 /**
  * Value that's used in place of id when creating something new.

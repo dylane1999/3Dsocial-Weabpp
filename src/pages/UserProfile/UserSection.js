@@ -7,41 +7,42 @@ const UserWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items:center;
+  align-items: center;
+  padding: 15px;
+
+  @media(max-width: 1200px){
+    flex-direction: row;
+  }
 `;
 const UserNameWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 15px;
-
+  @media(max-width: 1200px){
+    display: none
+    }
 `;
 
 const UserTitle = styled.div`
   font-family: aktiv-grotesk;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 12px;
   color: #ffffff;
   padding-bottom: 5px;
-  @media (max-width: 500px) {
-    font-size: 14px;
-  }
 `;
 
 const UserName = styled.div`
   font-family: aktiv-grotesk;
   font-weight: 500;
-  font-size: 25.888px;
+  font-size: 18.888px;
   color: #ffffff;
-
-    @media (max-width: 500px) {
-    font-size: 20px;
-  }
 `;
+
 
 const UserSection = (props) => {
   return (
     <UserWrapper>
-      <Avatar image={defaultPic} size={60} />{" "}
+        <Avatar image={defaultPic} size={110} />
       <UserNameWrapper>
         <UserTitle>Creator:</UserTitle>
         <UserName>{props.postUser}</UserName>
