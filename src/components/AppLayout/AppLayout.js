@@ -12,6 +12,7 @@ import UserSuggestions from "../App/UserSuggestions";
 import Home from "pages/Home";
 import Explore from "pages/Explore";
 import People from "pages/People";
+import UserProfile from "pages/UserProfile";
 
 import { useWindowSize } from "hooks/useWindowSize";
 import { useClickOutside } from "hooks/useClickOutside";
@@ -228,8 +229,11 @@ const AppLayout = ({ location, authUser }) => {
               <Route exact path={Routes.EXPLORE} component={Explore} />
 
               <Route exact path={Routes.PEOPLE} component={People} />
+              
+              <Route exact path={Routes.USER_PROFILE} component={UserProfile} />
 
               <Route component={NotFound} />
+
             </Switch>
           </Box>
         </Box>

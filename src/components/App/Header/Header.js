@@ -6,21 +6,16 @@ import { HEADER_HEIGHT } from "constants/Layout";
 import { useClickOutside } from "hooks/useClickOutside";
 import PropTypes from "prop-types";
 import React, { useRef, useState } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import styled from "styled-components";
 import defaultPic from "../../../img/default-pic.png";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import "firebase/storage";
-
-
-
-
-
-
-
-
+import * as Routes from "routes";
+import { generatePath } from "react-router-dom";
+import People from "../../../pages/People";
 
 const NavWrapper = styled.div`
   position: sticky;
@@ -49,7 +44,6 @@ const Button = styled.div`
   height: 100%;
   width: 100%;
   padding-right: 15px;
-
 `;
 
 const Logo = styled(A)`
@@ -84,6 +78,13 @@ const LeftSection = styled.div`
   background-color: #198fd2;
   padding-right: 15px;
 
+  @media(max-width: 1007px){
+    width: 60%;
+  }
+
+  @media(max-width: 682px){
+    width: 70%;
+  }
 `;
 
 const RightSection = styled.div`
@@ -93,8 +94,16 @@ const RightSection = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
-  background-color: #373737; 
+  background-color: #373737;
   padding-right: 15px;
+
+  @media(max-width: 1007px){
+    width: 40%;
+  }
+
+  @media(max-width: 682px){
+    width: 30%;
+  }
 `;
 
 const UserName = styled.div`
@@ -135,28 +144,30 @@ const Header = ({ location, toggleSideBar }) => {
     setDropdownOpen(null);
     setDropdownData([]);
   };
-
-
-
-
+  //   to={generatePath(Routes.USER_PROFILE, { username: auth.user.username })}
+  //    activeClassName="selected"
   return (
     <>
       <NavWrapper>
         <LeftSection>
-           {/*code to disaply site name  <Logo to={Routes.HOME}>{SiteInfo.name}</Logo>*/}
+          {/*code to disaply site name  <Logo to={Routes.HOME}>{SiteInfo.name}</Logo>*/}
           <SearchWrapper>
-            {" "}
             <Search location={location} placeholder="Search" />
           </SearchWrapper>
         </LeftSection>
         <RightSection>
           <UserContainer>
             <UserName>
-      <p>{user.email}</p>
+              <p>{user.email}</p>
             </UserName>
-            <Button>
-              <Avatar image={defaultPic} size={40} />
-            </Button>
+            <Link
+              exact
+              to={generatePath(Routes.USER_PROFILE, { username: user.uid })}
+            >
+              <Button>
+                <Avatar image={defaultPic} size={40} />
+              </Button>
+            </Link>
           </UserContainer>
           <Hamburger onClick={toggleSideBar}>
             <MenuIcon />
