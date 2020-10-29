@@ -12,3 +12,5 @@ To start the frontend
 
 After running the server, you can navigate to `http://localhost:3000`
 
+##Description:
+- This is the React Frontend that I build for a project meant to allow 3d printing enthusiasts to share designs amongst eachother
